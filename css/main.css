@@ -30,9 +30,15 @@ img { max-width: 100%; }
 .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 88px; display: flex; align-items: center; justify-content: space-between; padding: 0 44px; border-bottom: 1px solid transparent; transition: background .3s, border-color .3s, height .3s; }
 .site-header.scrolled, .page-inner .site-header, .page-post .site-header { height: 72px; background: rgba(7, 9, 15, .88); border-color: var(--line); backdrop-filter: blur(18px); }
 .brand { display: flex; align-items: center; gap: 13px; position: relative; z-index: 2; }
-.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.26); border-radius: 50%; }
-.brand-mark::before { content: ""; position: absolute; width: 24px; height: 9px; border: 1px solid var(--mars-bright); border-radius: 50%; transform: rotate(-14deg); }
-.brand-mark span { width: 11px; height: 11px; border-radius: 50%; background: var(--mars); box-shadow: inset -3px -2px 0 rgba(0,0,0,.24); }
+.brand-mark { width: 46px; height: 46px; display: block; flex: 0 0 auto; }
+.brand-mark svg { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 8px rgba(210, 91, 52, .12)); }
+.brand-orbit { fill: none; stroke: rgba(178, 193, 208, .44); stroke-width: 1.15; stroke-dasharray: 2.4 1.8; }
+.brand-planet { fill: url(#brand-mars); filter: drop-shadow(0 0 4px rgba(210, 91, 52, .45)); }
+.brand-continent { fill: rgba(91, 26, 20, .42); }
+.brand-flight { transform-origin: 26px 26px; animation: orbitMars 5.6s linear infinite; }
+.brand-starship { fill: url(#brand-ship); stroke: rgba(255, 255, 255, .8); stroke-width: .4; }
+.brand-window { fill: var(--signal); filter: drop-shadow(0 0 2px var(--signal)); }
+.brand-engine-glow { fill: var(--mars-bright); filter: drop-shadow(0 0 3px var(--mars-bright)); animation: enginePulse .7s ease-in-out infinite alternate; }
 .brand-copy { display: flex; flex-direction: column; gap: 3px; }
 .brand-copy strong { font: 700 13px/1 var(--mono); letter-spacing: .1em; }
 .brand-copy small { color: var(--faint); font: 400 8px/1 var(--mono); letter-spacing: .18em; }
@@ -178,6 +184,8 @@ img { max-width: 100%; }
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }.reveal.visible { opacity: 1; transform: none; }
 @keyframes sweep { to { transform: rotate(360deg); } }
 @keyframes heroIn { from { opacity: 0; transform: scale(1.05); } to { opacity: 1; transform: scale(1.015); } }
+@keyframes orbitMars { to { transform: rotate(360deg); } }
+@keyframes enginePulse { from { opacity: .45; transform: scaleX(.72); transform-origin: right; } to { opacity: 1; transform: scaleX(1.18); transform-origin: right; } }
 
 @media (max-width: 1050px) {
   :root { --shell: min(100% - 48px, 920px); }
