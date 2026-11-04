@@ -1,644 +1,101 @@
-<!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="iOSPrincekin的个人博客">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
-<meta property="og:site_name" content="iOSPrincekin的个人博客">
-<meta property="og:locale">
-<meta property="article:author" content="iOSPrincekin">
-<meta name="twitter:card" content="summary">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/archives/"/>
-
-
-
-
-
-  <title>Archive | iOSPrincekin的个人博客</title>
-  
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07090f">
+  <meta name="description" content="记录软件开发、系统设计与工程实践的人类火星探索主题技术博客">
+  <title>MARS / DEV LOG</title>
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/main.css">
 <meta name="generator" content="Hexo 8.1.2"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-archive">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">iOSPrincekin的个人博客</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+<body class="page-inner">
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header" data-header>
+    <a class="brand" href="/" aria-label="返回首页">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      <span class="brand-copy"><strong>MARS / DEV LOG</strong><small>MARS DEV LOG / CN</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="打开导航" aria-expanded="false" data-nav-toggle>
+      <span></span><span></span>
     </button>
-  </div>
-</div>
+    <nav class="site-nav" data-nav>
+      
+        <a href="/">首页</a>
+      
+        <a href="/archives/">探索日志</a>
+      
+        <a href="/categories/">技术领域</a>
+      
+        <a href="/projects/">项目档案</a>
+      
+        <a href="/about/">关于</a>
+      
+      <button class="search-trigger" type="button" data-search-open aria-label="搜索文章">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+        <span>搜索</span><kbd>⌘ K</kbd>
+      </button>
+    </nav>
+  </header>
 
-<nav class="site-nav">
+  <main><section class="inner-hero archive-hero">
+  <p class="eyebrow"><span></span>TRANSMISSION ARCHIVE</p>
+  <h1>探索日志</h1>
+  <p>所有技术记录，按抵达时间排序。</p>
+</section>
+<section class="archive-shell">
   
-
+    <div class="archive-year"><span>2020</span><i></i></div>
+    <article class="archive-item reveal">
+      <time>03.08</time>
+      <div><small>编译原理</small><h2><a href="/2020/03/08/%E4%BD%BF%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/">使用C语言实现一个词法分析器</a></h2></div>
+      <span>8 MIN</span><a href="/2020/03/08/%E4%BD%BF%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" aria-label="阅读文章">↗</a>
+    </article>
   
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
-
-      
-    </ul>
+    <div class="archive-year"><span>2019</span><i></i></div>
+    <article class="archive-item reveal">
+      <time>02.13</time>
+      <div><small>桌面开发</small><h2><a href="/2019/02/13/Mac%E5%BC%80%E5%8F%91App%E5%86%85%E5%90%AF%E7%94%A8Mail%E5%8F%91%E9%80%81%E5%B8%A6%E9%99%84%E4%BB%B6%E7%9A%84%E9%82%AE%E4%BB%B6/">Mac开发App内启用Mail发送带附件的邮件</a></h2></div>
+      <span>3 MIN</span><a href="/2019/02/13/Mac%E5%BC%80%E5%8F%91App%E5%86%85%E5%90%AF%E7%94%A8Mail%E5%8F%91%E9%80%81%E5%B8%A6%E9%99%84%E4%BB%B6%E7%9A%84%E9%82%AE%E4%BB%B6/" aria-label="阅读文章">↗</a>
+    </article>
   
-
+    <div class="archive-year"><span>2018</span><i></i></div>
+    <article class="archive-item reveal">
+      <time>10.23</time>
+      <div><small>移动开发</small><h2><a href="/2018/10/23/PrincekinKlineFrame%20K%E7%BA%BF%E5%9B%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/">PrincekinKlineFrame K线图库的使用</a></h2></div>
+      <span>2 MIN</span><a href="/2018/10/23/PrincekinKlineFrame%20K%E7%BA%BF%E5%9B%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" aria-label="阅读文章">↗</a>
+    </article>
   
-</nav>
+  <nav class="pagination"><span class="page-number current">1</span></nav>
+</section>
 
+</main>
 
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        Um..! 3 posts in total. Keep on posting.
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2020">2020</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/08/%E4%BD%BF%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" itemprop="url">
-              
-                <span itemprop="name">使用C语言实现一个词法分析器</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-03-08T18:44:14+08:00"
-              content="2020-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/13/Mac%E5%BC%80%E5%8F%91App%E5%86%85%E5%90%AF%E7%94%A8Mail%E5%8F%91%E9%80%81%E5%B8%A6%E9%99%84%E4%BB%B6%E7%9A%84%E9%82%AE%E4%BB%B6/" itemprop="url">
-              
-                <span itemprop="name">Mac开发App内启用Mail发送带附件的邮件</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-13T10:48:29+08:00"
-              content="2019-02-13" >
-          02-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/10/23/PrincekinKlineFrame%20K%E7%BA%BF%E5%9B%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="url">
-              
-                <span itemprop="name">PrincekinKlineFrame K线图库的使用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-10-23T15:32:00+08:00"
-              content="2018-10-23" >
-          10-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
+  <footer class="site-footer">
+    <div>
+      <span class="status-dot"></span>
+      <span>MISSION SYSTEMS NOMINAL</span>
     </div>
-  </div>
-  
-  
-  
+    <p>The frontier is not a place. It is a decision to keep going.</p>
+    <span>© 2026 iOSPrincekin</span>
+  </footer>
 
-  
-
-
-
-          </div>
-          
-
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="search-panel" data-search-panel aria-hidden="true">
+    <button class="search-backdrop" type="button" data-search-close aria-label="关闭搜索"></button>
+    <section class="search-dialog" role="dialog" aria-modal="true" aria-label="搜索探索日志">
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+        <input type="search" placeholder="搜索技术、项目或关键词…" autocomplete="off" data-search-input>
+        <button type="button" data-search-close>ESC</button>
+      </div>
+      <div class="search-results" data-search-results>
+        <p class="search-hint">输入关键词，检索全部探索日志。</p>
+      </div>
+    </section>
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%20%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2026</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">iOSPrincekin</span>
-
-  
-</div>
-
-
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+  <script>window.ARES_ROOT = "/";</script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>
+

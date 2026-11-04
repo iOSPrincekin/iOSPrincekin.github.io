@@ -1,307 +1,60 @@
-<!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="写在前面稍有开发经验的人都知道编译器的重要性，准备实现一个自己的编译器项目。编译器的结构中，当然是词法分析器最先开始工作的，所以先实现一个语言级别的词法分析器。 词法分析：将输入分解成一个个独立的词法符号，即”单词符号(token)“，简称单词 token一词在不少书中翻译成”记号“，我们认为比较贴切的翻译应当是”单词符号“。它是程序设计语言中”具有独立含义的最小词法单位“，在这个意义上与自然语言">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用C语言实现一个词法分析器">
-<meta property="og:url" content="http://yoursite.com/2020/03/08/%E4%BD%BF%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/index.html">
-<meta property="og:site_name" content="iOSPrincekin的个人博客">
-<meta property="og:description" content="写在前面稍有开发经验的人都知道编译器的重要性，准备实现一个自己的编译器项目。编译器的结构中，当然是词法分析器最先开始工作的，所以先实现一个语言级别的词法分析器。 词法分析：将输入分解成一个个独立的词法符号，即”单词符号(token)“，简称单词 token一词在不少书中翻译成”记号“，我们认为比较贴切的翻译应当是”单词符号“。它是程序设计语言中”具有独立含义的最小词法单位“，在这个意义上与自然语言">
-<meta property="og:locale">
-<meta property="og:image" content="http://yoursite.com/images/2.png">
-<meta property="article:published_time" content="2020-03-08T10:44:14.000Z">
-<meta property="article:modified_time" content="2020-03-09T14:23:30.000Z">
-<meta property="article:author" content="iOSPrincekin">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/images/2.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2020/03/08/使用C语言实现一个词法分析器/"/>
-
-
-
-
-
-  <title>使用C语言实现一个词法分析器 | iOSPrincekin的个人博客</title>
-  
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07090f">
+  <meta name="description" content="记录软件开发、系统设计与工程实践的人类火星探索主题技术博客">
+  <title>使用C语言实现一个词法分析器 · MARS / DEV LOG</title>
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/main.css">
 <meta name="generator" content="Hexo 8.1.2"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">iOSPrincekin的个人博客</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+<body class="page-post">
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header" data-header>
+    <a class="brand" href="/" aria-label="返回首页">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      <span class="brand-copy"><strong>MARS / DEV LOG</strong><small>MARS DEV LOG / CN</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="打开导航" aria-expanded="false" data-nav-toggle>
+      <span></span><span></span>
     </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+    <nav class="site-nav" data-nav>
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
+        <a href="/">首页</a>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
+        <a href="/archives/">探索日志</a>
       
-
+        <a href="/categories/">技术领域</a>
       
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/08/%E4%BD%BF%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iOSPrincekin的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">使用C语言实现一个词法分析器</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-08T18:44:14+08:00">
-                2020-03-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+        <a href="/projects/">项目档案</a>
       
+        <a href="/about/">关于</a>
       
+      <button class="search-trigger" type="button" data-search-open aria-label="搜索文章">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+        <span>搜索</span><kbd>⌘ K</kbd>
+      </button>
+    </nav>
+  </header>
 
-      
-        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>稍有开发经验的人都知道编译器的重要性，准备实现一个自己的编译器项目。<br>编译器的结构中，当然是词法分析器最先开始工作的，所以先实现一个语言级别的词法分析器。</p>
+  <main><article class="article-shell">
+  <header class="article-hero">
+    <div class="article-gridlines" aria-hidden="true"></div>
+    <div class="article-heading">
+      <a class="back-link" href="/archives/">← 返回探索日志</a>
+      <div class="article-meta"><span class="mission-code">MSN-200308-01</span><time>2020.03.08</time><span>8 MIN READ</span></div>
+      <h1>使用C语言实现一个词法分析器</h1>
+      <p class="article-kicker">编译原理</p>
+    </div>
+  </header>
+  <div class="article-layout">
+    <aside class="article-rail">
+      <span>TRANSMISSION</span>
+      <div></div>
+      <small>2020<br>MARS DEV LOG</small>
+    </aside>
+    <div class="article-content prose"><h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>稍有开发经验的人都知道编译器的重要性，准备实现一个自己的编译器项目。<br>编译器的结构中，当然是词法分析器最先开始工作的，所以先实现一个语言级别的词法分析器。</p>
 <p><code>词法分析</code>：将输入分解成一个个独立的词法符号，即”单词符号(token)“，简称单词</p>
 <p><code>token</code>一词在不少书中翻译成”记号“，我们认为比较贴切的翻译应当是”单词符号“。它是程序设计语言中<br>”具有独立含义的最小词法单位“，在这个意义上与自然语言中的”单词“的词义相同。但是，它们又不完全相同，<br>因为这里的”token“不仅仅包括”词“，还包含标点符号、操作符、分割符等。将它翻译成”单词符号“正是为了<br>提现这一点。但为了简洁起见，我们使用”单词“一词。</p>
 <h1 id="程序语言设计"><a href="#程序语言设计" class="headerlink" title="程序语言设计"></a>程序语言设计</h1><p>首先记住，我们的最终目的是实现一门高级计算机语言，就像C、Java那样的高级计算机语言，首先高级计算语言我们理解的最小单位即是”单词符号“，让我们来看下常见的高级计算机语言”单词符号“的种类：</p>
@@ -325,364 +78,48 @@
 <p> 由于NFA在同一个状态后，接收相同的字符，有不止一条路径可以选择，虽然也可以进行词法分析的实现，但是其的不确定性，导致在判断一个”单词符号token“时，需要记录和回溯(在当前状态判断失败的情况下，回退到上一个成功的状态)，导致效率很低，所以如果能有个”确定的有限自动机“就好了。</p>
 <h3 id="3-将NFA转为DFA"><a href="#3-将NFA转为DFA" class="headerlink" title="(3).将NFA转为DFA"></a>(3).将NFA转为DFA</h3><p> 用计算机程序实现确定的有限自动机(DFA)较容易。但是实现NFA则要困难一些，因为太多计算机没有足够好的可以进行”猜测“的硬件<br>通过一次同时尝试多有可能的路径，可以避免这种猜测。我们用字符串in来模拟图1的NFA。首先从状态1开始。现在，代替猜测应采用哪个ε转换，我们只是说此时NFA可能选择他们中的任何一个。因此，它是状态{1,4,9,14}当中的任何一个，即我们需要计算{1}的ε闭包。显然，不接收输入中的第一个字符，就不可能到达其他状态。<br>现在要根据字符i进行转换。从状态1可以到达状态2，从状态4可到达状态5，从状态9则无处可去，而从状态14可以到达状态15，由此得到状态集合{2,5,15}。但是，我们还必须计算ε闭包：从状态5有一个ε转换至状态8，从状态8有一个ε转换至状态6。因此这个NFA一定属于状态集合{2,5,6,8,15}。<br>对于下一个输入字符n，我们从状态6可到达状态7，但状态2、5、8和15都无相应的转换。因此得到状态集合{7},它的ε闭包是{6,7,8}。<br>现在我们已经到达字符串in的末尾，那么，这个NFA是否已经到达了终态呢?在我们得到的可能状态集合中，状态8是终态，因此in是一个ID单词。</p>
 <h3 id="3-代码实现"><a href="#3-代码实现" class="headerlink" title="(3).代码实现"></a>(3).代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 获取单个“单词符号”的方法</span></span><br><span class="line">tok_s <span class="title function_">gettok</span><span class="params">()</span> &#123;            <span class="comment">/* return the token type */</span></span><br><span class="line">    <span class="comment">/* skip white space */</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">isspace</span>(the_ch))</span><br><span class="line">        next_ch();</span><br><span class="line">    <span class="type">int</span> err_line = line;</span><br><span class="line">    <span class="type">int</span> err_col  = col;</span><br><span class="line">    <span class="keyword">switch</span> (the_ch) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;&#123;&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Lbrace, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;&#125;&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Rbrace, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;(&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Lparen, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;)&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Rparen, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;+&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Add, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;-&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Sub, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;*&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Mul, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;%&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Mod, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;;&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Semi, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;,&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Comma,err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;:&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Colon,err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;/&#x27;</span>:  next_ch(); <span class="keyword">return</span> div_or_cmt(err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;\&#x27;&#x27;</span>: next_ch(); <span class="keyword">return</span> char_lit(the_ch, err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;&lt;&#x27;</span>:  next_ch(); <span class="keyword">return</span> follow(<span class="string">&#x27;=&#x27;</span>, tk_Leq, tk_Lss,    err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;&gt;&#x27;</span>:  next_ch(); <span class="keyword">return</span> follow(<span class="string">&#x27;=&#x27;</span>, tk_Geq, tk_Gtr,    err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;=&#x27;</span>:  next_ch(); <span class="keyword">return</span> follow(<span class="string">&#x27;=&#x27;</span>, tk_Eq,  tk_Assign, err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;!&#x27;</span>:  next_ch(); <span class="keyword">return</span> follow(<span class="string">&#x27;=&#x27;</span>, tk_Neq, tk_Not,    err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;&amp;&#x27;</span>:  next_ch(); <span class="keyword">return</span> follow(<span class="string">&#x27;&amp;&#x27;</span>, tk_And, tk_EOI,    err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;|&#x27;</span>:  next_ch(); <span class="keyword">return</span> follow(<span class="string">&#x27;|&#x27;</span>, tk_Or,  tk_EOI,    err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;&quot;&#x27;</span> : <span class="keyword">return</span> string_lit(the_ch, err_line, err_col);</span><br><span class="line">        <span class="keyword">default</span>:   <span class="keyword">return</span> ident_or_int(err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> EOF:  <span class="keyword">return</span> (tok_s)&#123;tk_EOI, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/02/13/Mac%E5%BC%80%E5%8F%91App%E5%86%85%E5%90%AF%E7%94%A8Mail%E5%8F%91%E9%80%81%E5%B8%A6%E9%99%84%E4%BB%B6%E7%9A%84%E9%82%AE%E4%BB%B6/" rel="next" title="Mac开发App内启用Mail发送带附件的邮件">
-                <i class="fa fa-chevron-left"></i> Mac开发App内启用Mail发送带附件的邮件
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%20%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">程序语言设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">词法分析器的实现：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAC%E8%AF%AD%E8%A8%80%E5%B7%A5%E7%A8%8B%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">1.创建一个C语言工程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BAlex-c%E6%96%87%E4%BB%B6%E4%BD%9C%E4%B8%BA%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E7%9A%84%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">2.创建lex.c文件作为词法分析器的功能实现：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9C%A8lex-c%E6%96%87%E4%BB%B6%E4%B8%AD%E5%AE%9E%E7%8E%B0%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%8F%96%E5%92%8C%E5%AD%97%E7%AC%A6%E6%B5%81%E7%9A%84%E8%BE%93%E5%87%BA%E5%8A%9F%E8%83%BD%EF%BC%9B"><span class="nav-number">3.2.1.</span> <span class="nav-text">(1).在lex.c文件中实现目标文件的读取和字符流的输出功能；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9C%A8%E8%AF%BB%E5%85%A5%E5%AD%97%E7%AC%A6%E7%9A%84%E5%90%8C%E6%97%B6%EF%BC%8C%E9%9C%80%E8%A6%81%E8%BF%9B%E8%A1%8C%E5%AD%97%E7%AC%A6%E7%9A%84%E5%88%A4%E6%96%AD%E5%92%8C%E7%90%86%E8%A7%A3%EF%BC%8C%E8%BF%99%E4%B8%AA%E6%97%B6%E5%80%99%E5%B0%B1%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%B0%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.2.2.</span> <span class="nav-text">(2).在读入字符的同时，需要进行字符的判断和理解，这个时候就需要用到正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%B0%86NFA%E8%BD%AC%E4%B8%BADFA"><span class="nav-number">3.2.3.</span> <span class="nav-text">(3).将NFA转为DFA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.2.4.</span> <span class="nav-text">(3).代码实现</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2026</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">iOSPrincekin</span>
-
-  
 </div>
+    <aside class="article-toc" data-toc>
+      <p>ON THIS MISSION</p>
+      <nav data-toc-list></nav>
+    </aside>
+  </div>
+  <footer class="article-footer">
+    <div class="tag-list"><a href="/tags/C%E8%AF%AD%E8%A8%80/"># C语言</a><a href="/tags/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/"># 词法分析</a></div>
+    <div class="article-nav">
+      
+      <a href="/2019/02/13/Mac%E5%BC%80%E5%8F%91App%E5%86%85%E5%90%AF%E7%94%A8Mail%E5%8F%91%E9%80%81%E5%B8%A6%E9%99%84%E4%BB%B6%E7%9A%84%E9%82%AE%E4%BB%B6/"><small>NEXT LOG</small><strong>Mac开发App内启用Mail发送带附件的邮件 →</strong></a>
+    </div>
+  </footer>
+</article>
 
+</main>
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <footer class="site-footer">
+    <div>
+      <span class="status-dot"></span>
+      <span>MISSION SYSTEMS NOMINAL</span>
+    </div>
+    <p>The frontier is not a place. It is a decision to keep going.</p>
+    <span>© 2026 iOSPrincekin</span>
+  </footer>
 
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
+  <div class="search-panel" data-search-panel aria-hidden="true">
+    <button class="search-backdrop" type="button" data-search-close aria-label="关闭搜索"></button>
+    <section class="search-dialog" role="dialog" aria-modal="true" aria-label="搜索探索日志">
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+        <input type="search" placeholder="搜索技术、项目或关键词…" autocomplete="off" data-search-input>
+        <button type="button" data-search-close>ESC</button>
       </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
+      <div class="search-results" data-search-results>
+        <p class="search-hint">输入关键词，检索全部探索日志。</p>
       </div>
-    
-
-    
-
+    </section>
   </div>
 
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+  <script>window.ARES_ROOT = "/";</script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>
+

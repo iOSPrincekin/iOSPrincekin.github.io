@@ -1,915 +1,188 @@
-<!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="iOSPrincekin的个人博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="iOSPrincekin的个人博客">
-<meta property="og:locale">
-<meta property="article:author" content="iOSPrincekin">
-<meta name="twitter:card" content="summary">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/"/>
-
-
-
-
-
-  <title>iOSPrincekin的个人博客</title>
-  
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07090f">
+  <meta name="description" content="记录软件开发、系统设计与工程实践的人类火星探索主题技术博客">
+  <title>MARS / DEV LOG</title>
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/main.css">
 <meta name="generator" content="Hexo 8.1.2"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left 
-  page-home">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">iOSPrincekin的个人博客</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+<body class="page-home">
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header" data-header>
+    <a class="brand" href="/" aria-label="返回首页">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      <span class="brand-copy"><strong>MARS / DEV LOG</strong><small>MARS DEV LOG / CN</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="打开导航" aria-expanded="false" data-nav-toggle>
+      <span></span><span></span>
     </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+    <nav class="site-nav" data-nav>
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
+        <a href="/">首页</a>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
+        <a href="/archives/">探索日志</a>
       
-
+        <a href="/categories/">技术领域</a>
       
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-    
+        <a href="/projects/">项目档案</a>
       
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/08/%E4%BD%BF%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iOSPrincekin的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/08/%E4%BD%BF%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" itemprop="url">使用C语言实现一个词法分析器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-08T18:44:14+08:00">
-                2020-03-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+        <a href="/about/">关于</a>
       
-      
-
-      
-        
-          
-            <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>稍有开发经验的人都知道编译器的重要性，准备实现一个自己的编译器项目。<br>编译器的结构中，当然是词法分析器最先开始工作的，所以先实现一个语言级别的词法分析器。</p>
-<p><code>词法分析</code>：将输入分解成一个个独立的词法符号，即”单词符号(token)“，简称单词</p>
-<p><code>token</code>一词在不少书中翻译成”记号“，我们认为比较贴切的翻译应当是”单词符号“。它是程序设计语言中<br>”具有独立含义的最小词法单位“，在这个意义上与自然语言中的”单词“的词义相同。但是，它们又不完全相同，<br>因为这里的”token“不仅仅包括”词“，还包含标点符号、操作符、分割符等。将它翻译成”单词符号“正是为了<br>提现这一点。但为了简洁起见，我们使用”单词“一词。</p>
-<h1 id="程序语言设计"><a href="#程序语言设计" class="headerlink" title="程序语言设计"></a>程序语言设计</h1><p>首先记住，我们的最终目的是实现一门高级计算机语言，就像C、Java那样的高级计算机语言，首先高级计算语言我们理解的最小单位即是”单词符号“，让我们来看下常见的高级计算机语言”单词符号“的种类：</p>
-<p><code>标点符号和运算符、分隔符</code>: (, ), [, ], {, }, :, :&#x3D;,<br>., ,, ;, *, &#x2F;, +, -, &#x3D;, &lt;&gt;, &gt;, &lt;, &gt;&#x3D;, &lt;&#x3D;, &amp;, |.<br><code>关键字</code>: array, break, do, else, end, for, function, if, in, let, nil, of, then, to, type, var, while.</p>
-<p><code>标识符</code>: 一个表示符以字母开始，后面跟随零个或者多个字母、下划线、数字，标识符是忽略大小写的，关键字不可当做标识符。</p>
-<p><code>整型</code>:整型变量是由一串0-9的数字组成的。</p>
-<p><code>字符串</code>: A string literal starts and ends with double-quotes. A string can contain printable characters or escapes. Escapes start with a backslash . The allowed escape sequences are:<br>字符串由”开始和到”结束，一个字符串包含可打印的字符转义字符，允许的转移字符有：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\n           换行符</span><br><span class="line">\t           制表符</span><br><span class="line">\ˆc \ddd \<span class="string">&quot;</span></span><br><span class="line"><span class="string">\\          反斜杆</span></span><br><span class="line"><span class="string">\s· · ·s\   忽视</span></span><br></pre></td></tr></table></figure>
-
-
-<p><code>空白符</code>：任何字符串之外的空白符都必须忽视，空白符由空格、制表符、换行符、注释等组成，注释以/*开始，以*/结束,注释是可以嵌套的。</p>
-<p>词法分析器的作用就是将输入的一串字符流，识别成一个个”单词符号(token)“</p>
-<h1 id="词法分析器的实现："><a href="#词法分析器的实现：" class="headerlink" title="词法分析器的实现："></a>词法分析器的实现：</h1><h2 id="1-创建一个C语言工程："><a href="#1-创建一个C语言工程：" class="headerlink" title="1.创建一个C语言工程："></a>1.创建一个C语言工程：</h2><p>这个我创建的是一个简单的xcode工程，里面只包含几个简单的C文件，完全可以跨平台使用</p>
-<h2 id="2-创建lex-c文件作为词法分析器的功能实现："><a href="#2-创建lex-c文件作为词法分析器的功能实现：" class="headerlink" title="2.创建lex.c文件作为词法分析器的功能实现："></a>2.创建lex.c文件作为词法分析器的功能实现：</h2><h3 id="1-在lex-c文件中实现目标文件的读取和字符流的输出功能；"><a href="#1-在lex-c文件中实现目标文件的读取和字符流的输出功能；" class="headerlink" title="(1).在lex.c文件中实现目标文件的读取和字符流的输出功能；"></a>(1).在lex.c文件中实现目标文件的读取和字符流的输出功能；</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/// 文件的读取和写入操作</span><br><span class="line">/// @param fp 文件符</span><br><span class="line">/// @param std 输入或者输出</span><br><span class="line">/// @param mode 读取或者写入模式</span><br><span class="line">/// @param fn 文件路径</span><br><span class="line">void init_io(FILE **fp, FILE *std, const char mode[], const char fn[]) &#123;</span><br><span class="line">    if (fn[0] == &#x27;\0&#x27;)</span><br><span class="line">        *fp = std;</span><br><span class="line">    else if ((*fp = fopen(fn, mode)) == NULL)</span><br><span class="line">        error(0, 0, &quot;Can&#x27;t open %s\n&quot;, fn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/// 读取下一个字符</span><br><span class="line">static int next_ch() &#123;     /* get next char from input */</span><br><span class="line">   // getc 为C语言读取下一个字符的方法</span><br><span class="line">    the_ch = getc(source_fp);</span><br><span class="line">    ++col;</span><br><span class="line">    if (the_ch == &#x27;\n&#x27;) &#123;</span><br><span class="line">        ++line;</span><br><span class="line">        col = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;the_ch===::%c===::%d\n&quot;,the_ch,the_ch);</span><br><span class="line">    return the_ch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-在读入字符的同时，需要进行字符的判断和理解，这个时候就需要用到正则表达式"><a href="#2-在读入字符的同时，需要进行字符的判断和理解，这个时候就需要用到正则表达式" class="headerlink" title="(2).在读入字符的同时，需要进行字符的判断和理解，这个时候就需要用到正则表达式"></a>(2).在读入字符的同时，需要进行字符的判断和理解，这个时候就需要用到正则表达式</h3><p>例如，对于高级语言中的表示符，我们可以用正则表达式 [a-zA-Z][a-zA-Z0-9_]* 来表示，但是正则表达式只是理论上的匹配，真正做到一个字符判断可模拟的、准执行的需要用到NFA，非确定有限自动机(NFA)是一个需要对从一个状态出发的多条标有相同符号的边进行选择的自动机。</p>
-<p><img src="/./images/2.png" alt="NFA"></p>
-<p> <i>图1：NFA的一个示例图</i></p>
-<p> 由于NFA在同一个状态后，接收相同的字符，有不止一条路径可以选择，虽然也可以进行词法分析的实现，但是其的不确定性，导致在判断一个”单词符号token“时，需要记录和回溯(在当前状态判断失败的情况下，回退到上一个成功的状态)，导致效率很低，所以如果能有个”确定的有限自动机“就好了。</p>
-<h3 id="3-将NFA转为DFA"><a href="#3-将NFA转为DFA" class="headerlink" title="(3).将NFA转为DFA"></a>(3).将NFA转为DFA</h3><p> 用计算机程序实现确定的有限自动机(DFA)较容易。但是实现NFA则要困难一些，因为太多计算机没有足够好的可以进行”猜测“的硬件<br>通过一次同时尝试多有可能的路径，可以避免这种猜测。我们用字符串in来模拟图1的NFA。首先从状态1开始。现在，代替猜测应采用哪个ε转换，我们只是说此时NFA可能选择他们中的任何一个。因此，它是状态{1,4,9,14}当中的任何一个，即我们需要计算{1}的ε闭包。显然，不接收输入中的第一个字符，就不可能到达其他状态。<br>现在要根据字符i进行转换。从状态1可以到达状态2，从状态4可到达状态5，从状态9则无处可去，而从状态14可以到达状态15，由此得到状态集合{2,5,15}。但是，我们还必须计算ε闭包：从状态5有一个ε转换至状态8，从状态8有一个ε转换至状态6。因此这个NFA一定属于状态集合{2,5,6,8,15}。<br>对于下一个输入字符n，我们从状态6可到达状态7，但状态2、5、8和15都无相应的转换。因此得到状态集合{7},它的ε闭包是{6,7,8}。<br>现在我们已经到达字符串in的末尾，那么，这个NFA是否已经到达了终态呢?在我们得到的可能状态集合中，状态8是终态，因此in是一个ID单词。</p>
-<h3 id="3-代码实现"><a href="#3-代码实现" class="headerlink" title="(3).代码实现"></a>(3).代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 获取单个“单词符号”的方法</span></span><br><span class="line">tok_s <span class="title function_">gettok</span><span class="params">()</span> &#123;            <span class="comment">/* return the token type */</span></span><br><span class="line">    <span class="comment">/* skip white space */</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">isspace</span>(the_ch))</span><br><span class="line">        next_ch();</span><br><span class="line">    <span class="type">int</span> err_line = line;</span><br><span class="line">    <span class="type">int</span> err_col  = col;</span><br><span class="line">    <span class="keyword">switch</span> (the_ch) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;&#123;&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Lbrace, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;&#125;&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Rbrace, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;(&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Lparen, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;)&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Rparen, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;+&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Add, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;-&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Sub, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;*&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Mul, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;%&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Mod, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;;&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Semi, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;,&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Comma,err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;:&#x27;</span>:  next_ch(); <span class="keyword">return</span> (tok_s)&#123;tk_Colon,err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;/&#x27;</span>:  next_ch(); <span class="keyword">return</span> div_or_cmt(err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;\&#x27;&#x27;</span>: next_ch(); <span class="keyword">return</span> char_lit(the_ch, err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;&lt;&#x27;</span>:  next_ch(); <span class="keyword">return</span> follow(<span class="string">&#x27;=&#x27;</span>, tk_Leq, tk_Lss,    err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;&gt;&#x27;</span>:  next_ch(); <span class="keyword">return</span> follow(<span class="string">&#x27;=&#x27;</span>, tk_Geq, tk_Gtr,    err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;=&#x27;</span>:  next_ch(); <span class="keyword">return</span> follow(<span class="string">&#x27;=&#x27;</span>, tk_Eq,  tk_Assign, err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;!&#x27;</span>:  next_ch(); <span class="keyword">return</span> follow(<span class="string">&#x27;=&#x27;</span>, tk_Neq, tk_Not,    err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;&amp;&#x27;</span>:  next_ch(); <span class="keyword">return</span> follow(<span class="string">&#x27;&amp;&#x27;</span>, tk_And, tk_EOI,    err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;|&#x27;</span>:  next_ch(); <span class="keyword">return</span> follow(<span class="string">&#x27;|&#x27;</span>, tk_Or,  tk_EOI,    err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;&quot;&#x27;</span> : <span class="keyword">return</span> string_lit(the_ch, err_line, err_col);</span><br><span class="line">        <span class="keyword">default</span>:   <span class="keyword">return</span> ident_or_int(err_line, err_col);</span><br><span class="line">        <span class="keyword">case</span> EOF:  <span class="keyword">return</span> (tok_s)&#123;tk_EOI, err_line, err_col, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/13/Mac%E5%BC%80%E5%8F%91App%E5%86%85%E5%90%AF%E7%94%A8Mail%E5%8F%91%E9%80%81%E5%B8%A6%E9%99%84%E4%BB%B6%E7%9A%84%E9%82%AE%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iOSPrincekin的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/13/Mac%E5%BC%80%E5%8F%91App%E5%86%85%E5%90%AF%E7%94%A8Mail%E5%8F%91%E9%80%81%E5%B8%A6%E9%99%84%E4%BB%B6%E7%9A%84%E9%82%AE%E4%BB%B6/" itemprop="url">Mac开发App内启用Mail发送带附件的邮件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-13T10:48:29+08:00">
-                2019-02-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在mac开发过程中，会遇到需要发送带有附件邮件的情况，最常见的就是用户想向我们发送带有log文件和问题描述的邮件，这就需要我们开发这一功能，我的这篇文章是针对Qt C++开发的同学，如果需要OC语言和Swift版的相对应功能的代码，可以回复我。</p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">void OnFeedback()</span><br><span class="line">&#123;</span><br><span class="line">    string logName = &quot;/Users/lee/Desktop/log.txt&quot;;     // 测试中log文件的位置，可以根据实际情况更换   不可使用 ~/Desktop</span><br><span class="line">    string logPathStr = &quot;\&quot;&quot; + logName + &quot;\&quot;&quot;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            QString aScript =</span><br><span class="line">                    QString(</span><br><span class="line">                    &quot;tell application \&quot;Mail\&quot;\n&quot;</span><br><span class="line">                        &quot;set newMessage to (a reference to (make new outgoing message))\n&quot;</span><br><span class="line"></span><br><span class="line">                        &quot;tell newMessage\n&quot;</span><br><span class="line">                            &quot;make new recipient at beginning of to recipients ¬\n&quot;</span><br><span class="line">                                &quot;with properties &#123;address:\&quot;15267030696@163.com\&quot;&#125;\n&quot;</span><br><span class="line"></span><br><span class="line">                            &quot;set the subject to \&quot;App---问题反馈\&quot;\n&quot;</span><br><span class="line">                            &quot;set the content to \&quot;请描述您使用App遇到的问题：\\n\\n\\n\\n\\n\\n\\n\&quot;\n&quot;</span><br><span class="line">                            &quot;set color of content to &#123;64614, 0, 111&#125;\n&quot;</span><br><span class="line">                            &quot;set size of content to 40\n&quot;</span><br><span class="line">                            &quot;tell content\n&quot;</span><br><span class="line">                                &quot;make new attachment ¬\n&quot;</span><br><span class="line">                                    &quot;with properties &#123;file name: %1 as string&#125; ¬\n&quot;</span><br><span class="line">                                    &quot;at after the last word of the last paragraph\n&quot;</span><br><span class="line">                            &quot;end tell\n&quot;</span><br><span class="line">                            &quot;set visible to true\n&quot;</span><br><span class="line">                        &quot;activate application \&quot;Mail\&quot;\n&quot;</span><br><span class="line">                        &quot;end tell\n&quot;</span><br><span class="line">                    &quot;end tell\n&quot;).arg(logPathStr.c_str());</span><br><span class="line"></span><br><span class="line">         cout &lt;&lt; aScript.toStdString() &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    QString osascript = &quot;/usr/bin/osascript&quot;;</span><br><span class="line">    QStringList processArguments;</span><br><span class="line">    processArguments &lt;&lt; &quot;-l&quot; &lt;&lt; &quot;AppleScript&quot;;</span><br><span class="line"></span><br><span class="line">    QProcess p;</span><br><span class="line">     p.start(osascript, processArguments);</span><br><span class="line">     p.write(aScript.toUtf8());</span><br><span class="line">     p.closeWriteChannel();</span><br><span class="line">     p.waitForReadyRead(-1);</span><br><span class="line">     QByteArray result = p.readAll();</span><br><span class="line">     QString resultAsString(result); // if appropriate</span><br><span class="line">     qDebug() &lt;&lt; &quot;the result of the script is&quot; &lt;&lt; resultAsString;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void MainWindow::on_pushButton_clicked()</span><br><span class="line">&#123;</span><br><span class="line">   OnFeedback();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/PrincekinKlineFrame%20K%E7%BA%BF%E5%9B%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iOSPrincekin的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/23/PrincekinKlineFrame%20K%E7%BA%BF%E5%9B%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="url">PrincekinKlineFrame K线图库的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-23T15:32:00+08:00">
-                2018-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="PrincekinKlineFrame"><a href="#PrincekinKlineFrame" class="headerlink" title="PrincekinKlineFrame"></a>PrincekinKlineFrame</h1><p><a href="https://github.com/iOSPrincekin/PrincekinKlineFrame"><img src="http://cocoapod-badges.herokuapp.com/p/PrincekinKlineFrame/badge.png" alt="Platform"></a><br><a href="https://swift.org/"><img src="https://img.shields.io/badge/Swift-4.1-blue.svg" alt="Language: Swift-4.1"></a></p>
-<p><code>PrincekinKlineFrame</code> 是使用Swift语言编写的在iOS平台上运行的k线图库，她具有轻量、敏捷、稳定等特点，可为虚拟货币、金融等行业提供专业的k线图信息显示，具有很强的实用性和可扩展性。</p>
-<hr>
-<h1 id="使用文档"><a href="#使用文档" class="headerlink" title="使用文档"></a>使用文档</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="CocoaPods"><a href="#CocoaPods" class="headerlink" title="CocoaPods"></a>CocoaPods</h3><p>1.使用CocoaPods安装，pod ‘PrincekinKlineFrame’<br>2.引入 ‘import PrincekinKlineFrame’</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><details open=1>
-<summary>竖屏</summary>
-<h5>步骤：</h5>
-1.在你的工程中创建一个类A继承自PKKLineContainerView，PKKLineContainerView是PrincekinKlineFrame竖屏方向上的K线图view；<br>
-2.让类A实现PKKLineChangeKlineTypeDelegate代理方法；<br>
-3.在类A中创建通过Http请求获取K线图数据，并将获取的K线图数据数据通过从PKKLineContainerView继承来的对象方法initData赋值初始数据；
-<br>
-4.如果使用socket推送更新K线图数据，那么将推送过来的K线图数据通过从PKKLineContainerView继承来的对象方法appendData更新K线图数据；<br>
-5.可参考PrincekinKlineFrameDemo<br>
-<h5>关于</h5>
-[PrincekinKlineFrameDemo](https://github.com/iOSPrincekin/PrincekinKlineFrame/tree/master/PrincekinKlineFrameDemo)说明：<br>
-1.我采用的是OHHTTPStubs模拟网络请求，获取K线图的Http数据，可用于开发过程中的网络调试，如果感兴趣可参考 [OHHTTPStubs](https://github.com/AliSoftware/OHHTTPStubs)<br>
-2.为了实现实时推送的效果，我自己写了一个类SocketStob来模拟Socket的推送，在真实的开发开发环境中，推荐使用第三方库 [SocketRocket](https://github.com/facebook/SocketRocket) 来完成iOS的socket连接；<br>
-3.虽然有15min、30min、1hour等按钮可以点击，但是我只实现15min的网络数据，在开发过程中，可以更具需要添加网络数据；<br>
-</details>
-
-
-
-
-
-
-<details open=1>
-<summary>竖屏</summary>
-
-<p><a href="https://github.com/iOSPrincekin/PrincekinKlineFrame"><img src="/2018/10/23/PrincekinKlineFrame%20K%E7%BA%BF%E5%9B%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/%E7%AB%96%E5%B1%8F.gif" alt="img"></a></p>
-</details>
-
-<hr>
-<h1 id="许可"><a href="#许可" class="headerlink" title="许可"></a>许可</h1><p>PrincekinKlineFrame 是在MIT协议下开发完成的. 关于细节请查看<a href="https://github.com/iOSPrincekin/PrincekinKlineFrame/blob/master/LICENSE">MIT协议</a>。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-
-
-          </div>
-          
-
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+      <button class="search-trigger" type="button" data-search-open aria-label="搜索文章">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+        <span>搜索</span><kbd>⌘ K</kbd>
+      </button>
+    </nav>
+  </header>
+
+  <main><section class="hero">
+  <div class="hero-media" aria-hidden="true"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-orbit" aria-hidden="true"><span></span></div>
+  <div class="hero-content">
+    <p class="eyebrow"><span></span>HUMANITY / SOFTWARE / MARS</p>
+    <h1>向未知编程<br><em>BUILD THE UNKNOWN.</em></h1>
+    <p class="hero-lead">以软件为飞船，以好奇心为燃料。记录每一次技术探索，也记录人类走向火星的勇气。</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="/archives/">阅读探索日志<span>↗</span></a>
+      <a class="button button-ghost" href="/projects/">查看项目档案</a>
     </div>
   </div>
+  <div class="hero-telemetry" aria-label="站点信息">
+    <div><small>LOCATION</small><strong>31.95°N / 118.78°E</strong></div>
+    <div><small>FOCUS</small><strong>SOFTWARE SYSTEMS</strong></div>
+    <div><small>LOGS</small><strong>3 TRANSMISSIONS</strong></div>
+  </div>
+  <a class="scroll-cue" href="#mission" aria-label="继续探索"><span></span>SCROLL TO EXPLORE</a>
+</section>
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%20%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-
-      
-
+<section class="mission-section section-shell" id="mission">
+  <div class="section-heading reveal">
+    <p class="eyebrow"><span></span>THE MISSION</p>
+    <h2>代码是抵达未知世界<br>最可靠的航行工具</h2>
+  </div>
+  <div class="mission-grid">
+    <div class="mission-copy reveal">
+      <p>在代码、系统与产品之间持续探索，把复杂问题转化为可靠、清晰、可复用的工程实践。</p>
+      <p>这里收录软件开发中的真实问题、设计判断与实现细节。每一篇文章都是一次任务复盘：从发现异常，到建立模型，再到让系统稳定运行。</p>
+      <a class="text-link" href="/about/">了解这次长期任务 <span>→</span></a>
     </div>
-  </aside>
+    <div class="mission-card reveal" aria-label="任务原则">
+      <div class="radar"><span></span><i></i><b></b></div>
+      <ul>
+        <li><span>01</span><div><strong>保持好奇</strong><small>CURIOUS BY DEFAULT</small></div></li>
+        <li><span>02</span><div><strong>追求清晰</strong><small>CLARITY OVER NOISE</small></div></li>
+        <li><span>03</span><div><strong>勇于验证</strong><small>COURAGE TO TEST</small></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
 
+<section class="logs-section section-shell">
+  <div class="section-heading row reveal">
+    <div><p class="eyebrow"><span></span>LATEST TRANSMISSIONS</p><h2>最新探索日志</h2></div>
+    <a class="text-link" href="/archives/">查看全部日志 <span>→</span></a>
+  </div>
+  <div class="post-grid">
+    
+      <article class="post-card reveal">
+        <a class="post-card-link" href="/2020/03/08/%E4%BD%BF%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" aria-label="阅读 使用C语言实现一个词法分析器"></a>
+        <div class="post-card-top">
+          <span class="mission-code">MSN-200308-01</span>
+          <time datetime="2020-03-08T10:44:14.000Z">2020.03.08</time>
+        </div>
+        <div class="post-card-body">
+          <span class="post-category">编译原理</span>
+          <h3>使用C语言实现一个词法分析器</h3>
+          <p>写在前面稍有开发经验的人都知道编译器的重要性，准备实现一个自己的编译器项目。编译器的结构中，当然是词法分析器最先开始工作的，所以先实现一个语言级别的词法分析器。
+词法分析：将输入分解成一...</p>
+        </div>
+        <div class="post-card-foot"><span>8 MIN READ</span><span class="card-arrow">↗</span></div>
+      </article>
+    
+      <article class="post-card reveal">
+        <a class="post-card-link" href="/2019/02/13/Mac%E5%BC%80%E5%8F%91App%E5%86%85%E5%90%AF%E7%94%A8Mail%E5%8F%91%E9%80%81%E5%B8%A6%E9%99%84%E4%BB%B6%E7%9A%84%E9%82%AE%E4%BB%B6/" aria-label="阅读 Mac开发App内启用Mail发送带附件的邮件"></a>
+        <div class="post-card-top">
+          <span class="mission-code">MSN-190213-02</span>
+          <time datetime="2019-02-13T02:48:29.000Z">2019.02.13</time>
+        </div>
+        <div class="post-card-body">
+          <span class="post-category">桌面开发</span>
+          <h3>Mac开发App内启用Mail发送带附件的邮件</h3>
+          <p>背景在mac开发过程中，会遇到需要发送带有附件邮件的情况，最常见的就是用户想向我们发送带有log文件和问题描述的邮件，这就需要我们开发这一功能，我的这篇文章是针对Qt C++开发的同学，...</p>
+        </div>
+        <div class="post-card-foot"><span>3 MIN READ</span><span class="card-arrow">↗</span></div>
+      </article>
+    
+      <article class="post-card reveal">
+        <a class="post-card-link" href="/2018/10/23/PrincekinKlineFrame%20K%E7%BA%BF%E5%9B%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" aria-label="阅读 PrincekinKlineFrame K线图库的使用"></a>
+        <div class="post-card-top">
+          <span class="mission-code">MSN-181023-03</span>
+          <time datetime="2018-10-23T07:32:00.000Z">2018.10.23</time>
+        </div>
+        <div class="post-card-body">
+          <span class="post-category">移动开发</span>
+          <h3>PrincekinKlineFrame K线图库的使用</h3>
+          <p>PrincekinKlineFrame
+PrincekinKlineFrame 是使用Swift语言编写的在iOS平台上运行的k线图库，她具有轻量、敏捷、稳定等特点，可为虚拟货币、金融等...</p>
+        </div>
+        <div class="post-card-foot"><span>2 MIN READ</span><span class="card-arrow">↗</span></div>
+      </article>
+    
+  </div>
+</section>
 
-        
+<section class="domains-section section-shell">
+  <div class="section-heading reveal"><p class="eyebrow"><span></span>EXPLORATION DOMAINS</p><h2>持续深入的技术领域</h2></div>
+  <div class="domain-list">
+    
+      <div class="domain-row reveal"><span>01</span><h3>移动开发<small>MOBILE ENGINEERING</small></h3><p>Swift · iOS · 交互与性能</p><i>→</i></div>
+    
+      <div class="domain-row reveal"><span>02</span><h3>系统设计<small>SYSTEM DESIGN</small></h3><p>架构 · 并发 · 可靠性</p><i>→</i></div>
+    
+      <div class="domain-row reveal"><span>03</span><h3>工程效率<small>ENGINEERING TOOLS</small></h3><p>自动化 · 工具链 · 开发体验</p><i>→</i></div>
+    
+      <div class="domain-row reveal"><span>04</span><h3>智能探索<small>INTELLIGENT SYSTEMS</small></h3><p>AI · 数据 · 新型交互</p><i>→</i></div>
+    
+  </div>
+</section>
+
+<section class="manifesto section-shell reveal">
+  <p class="eyebrow"><span></span>FIELD NOTE / 001</p>
+  <blockquote>“真正的探索，不是确信前方安全，<br>而是在未知中仍然选择向前。”</blockquote>
+  <div><span></span><small>KEEP BUILDING<br>KEEP EXPLORING</small></div>
+</section>
+
+</main>
+
+  <footer class="site-footer">
+    <div>
+      <span class="status-dot"></span>
+      <span>MISSION SYSTEMS NOMINAL</span>
+    </div>
+    <p>The frontier is not a place. It is a decision to keep going.</p>
+    <span>© 2026 iOSPrincekin</span>
+  </footer>
+
+  <div class="search-panel" data-search-panel aria-hidden="true">
+    <button class="search-backdrop" type="button" data-search-close aria-label="关闭搜索"></button>
+    <section class="search-dialog" role="dialog" aria-modal="true" aria-label="搜索探索日志">
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+        <input type="search" placeholder="搜索技术、项目或关键词…" autocomplete="off" data-search-input>
+        <button type="button" data-search-close>ESC</button>
       </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2026</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">iOSPrincekin</span>
-
-  
-</div>
-
-
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
+      <div class="search-results" data-search-results>
+        <p class="search-hint">输入关键词，检索全部探索日志。</p>
       </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
+    </section>
   </div>
 
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+  <script>window.ARES_ROOT = "/";</script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>
+

@@ -1,310 +1,60 @@
-<!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="swift kline iOS," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="PrincekinKlineFrame PrincekinKlineFrame 是使用Swift语言编写的在iOS平台上运行的k线图库，她具有轻量、敏捷、稳定等特点，可为虚拟货币、金融等行业提供专业的k线图信息显示，具有很强的实用性和可扩展性。  使用文档安装CocoaPods1.使用CocoaPods安装，pod ‘PrincekinKlineFrame’2.引入 ‘import Princek">
-<meta property="og:type" content="article">
-<meta property="og:title" content="PrincekinKlineFrame K线图库的使用">
-<meta property="og:url" content="http://yoursite.com/2018/10/23/PrincekinKlineFrame%20K%E7%BA%BF%E5%9B%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
-<meta property="og:site_name" content="iOSPrincekin的个人博客">
-<meta property="og:description" content="PrincekinKlineFrame PrincekinKlineFrame 是使用Swift语言编写的在iOS平台上运行的k线图库，她具有轻量、敏捷、稳定等特点，可为虚拟货币、金融等行业提供专业的k线图信息显示，具有很强的实用性和可扩展性。  使用文档安装CocoaPods1.使用CocoaPods安装，pod ‘PrincekinKlineFrame’2.引入 ‘import Princek">
-<meta property="og:locale">
-<meta property="og:image" content="http://cocoapod-badges.herokuapp.com/p/PrincekinKlineFrame/badge.png">
-<meta property="og:image" content="https://img.shields.io/badge/Swift-4.1-blue.svg">
-<meta property="og:image" content="http://yoursite.com/2018/10/23/PrincekinKlineFrame%20K%E7%BA%BF%E5%9B%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/%E7%AB%96%E5%B1%8F.gif">
-<meta property="article:published_time" content="2018-10-23T07:32:00.000Z">
-<meta property="article:modified_time" content="2026-11-01T15:31:23.739Z">
-<meta property="article:author" content="iOSPrincekin">
-<meta property="article:tag" content="swift kline iOS">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://cocoapod-badges.herokuapp.com/p/PrincekinKlineFrame/badge.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2018/10/23/PrincekinKlineFrame K线图库的使用/"/>
-
-
-
-
-
-  <title>PrincekinKlineFrame K线图库的使用 | iOSPrincekin的个人博客</title>
-  
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07090f">
+  <meta name="description" content="记录软件开发、系统设计与工程实践的人类火星探索主题技术博客">
+  <title>PrincekinKlineFrame K线图库的使用 · MARS / DEV LOG</title>
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/main.css">
 <meta name="generator" content="Hexo 8.1.2"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">iOSPrincekin的个人博客</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+<body class="page-post">
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header" data-header>
+    <a class="brand" href="/" aria-label="返回首页">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      <span class="brand-copy"><strong>MARS / DEV LOG</strong><small>MARS DEV LOG / CN</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="打开导航" aria-expanded="false" data-nav-toggle>
+      <span></span><span></span>
     </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+    <nav class="site-nav" data-nav>
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
+        <a href="/">首页</a>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
+        <a href="/archives/">探索日志</a>
       
-
+        <a href="/categories/">技术领域</a>
       
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/PrincekinKlineFrame%20K%E7%BA%BF%E5%9B%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iOSPrincekin的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">PrincekinKlineFrame K线图库的使用</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-23T15:32:00+08:00">
-                2018-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+        <a href="/projects/">项目档案</a>
       
+        <a href="/about/">关于</a>
       
+      <button class="search-trigger" type="button" data-search-open aria-label="搜索文章">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+        <span>搜索</span><kbd>⌘ K</kbd>
+      </button>
+    </nav>
+  </header>
 
-      
-        <h1 id="PrincekinKlineFrame"><a href="#PrincekinKlineFrame" class="headerlink" title="PrincekinKlineFrame"></a>PrincekinKlineFrame</h1><p><a href="https://github.com/iOSPrincekin/PrincekinKlineFrame"><img src="http://cocoapod-badges.herokuapp.com/p/PrincekinKlineFrame/badge.png" alt="Platform"></a><br><a href="https://swift.org/"><img src="https://img.shields.io/badge/Swift-4.1-blue.svg" alt="Language: Swift-4.1"></a></p>
+  <main><article class="article-shell">
+  <header class="article-hero">
+    <div class="article-gridlines" aria-hidden="true"></div>
+    <div class="article-heading">
+      <a class="back-link" href="/archives/">← 返回探索日志</a>
+      <div class="article-meta"><span class="mission-code">MSN-181023-01</span><time>2018.10.23</time><span>2 MIN READ</span></div>
+      <h1>PrincekinKlineFrame K线图库的使用</h1>
+      <p class="article-kicker">移动开发</p>
+    </div>
+  </header>
+  <div class="article-layout">
+    <aside class="article-rail">
+      <span>TRANSMISSION</span>
+      <div></div>
+      <small>2018<br>MARS DEV LOG</small>
+    </aside>
+    <div class="article-content prose"><h1 id="PrincekinKlineFrame"><a href="#PrincekinKlineFrame" class="headerlink" title="PrincekinKlineFrame"></a>PrincekinKlineFrame</h1><p><a href="https://github.com/iOSPrincekin/PrincekinKlineFrame"><img src="http://cocoapod-badges.herokuapp.com/p/PrincekinKlineFrame/badge.png" alt="Platform"></a><br><a href="https://swift.org/"><img src="https://img.shields.io/badge/Swift-4.1-blue.svg" alt="Language: Swift-4.1"></a></p>
 <p><code>PrincekinKlineFrame</code> 是使用Swift语言编写的在iOS平台上运行的k线图库，她具有轻量、敏捷、稳定等特点，可为虚拟货币、金融等行业提供专业的k线图信息显示，具有很强的实用性和可扩展性。</p>
 <hr>
 <h1 id="使用文档"><a href="#使用文档" class="headerlink" title="使用文档"></a>使用文档</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="CocoaPods"><a href="#CocoaPods" class="headerlink" title="CocoaPods"></a>CocoaPods</h3><p>1.使用CocoaPods安装，pod ‘PrincekinKlineFrame’<br>2.引入 ‘import PrincekinKlineFrame’</p>
@@ -337,371 +87,48 @@
 
 <hr>
 <h1 id="许可"><a href="#许可" class="headerlink" title="许可"></a>许可</h1><p>PrincekinKlineFrame 是在MIT协议下开发完成的. 关于细节请查看<a href="https://github.com/iOSPrincekin/PrincekinKlineFrame/blob/master/LICENSE">MIT协议</a>。</p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/swift-kline-iOS/" rel="tag"># swift kline iOS</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/13/Mac%E5%BC%80%E5%8F%91App%E5%86%85%E5%90%AF%E7%94%A8Mail%E5%8F%91%E9%80%81%E5%B8%A6%E9%99%84%E4%BB%B6%E7%9A%84%E9%82%AE%E4%BB%B6/" rel="prev" title="Mac开发App内启用Mail发送带附件的邮件">
-                Mac开发App内启用Mail发送带附件的邮件 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%20%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PrincekinKlineFrame"><span class="nav-number">1.</span> <span class="nav-text">PrincekinKlineFrame</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3"><span class="nav-number">2.</span> <span class="nav-text">使用文档</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CocoaPods"><span class="nav-number">2.1.1.</span> <span class="nav-text">CocoaPods</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">2.2.1.</span> <span class="nav-text">步骤：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">2.2.2.</span> <span class="nav-text">关于</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%B8%E5%8F%AF"><span class="nav-number">3.</span> <span class="nav-text">许可</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2026</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">iOSPrincekin</span>
-
-  
 </div>
+    <aside class="article-toc" data-toc>
+      <p>ON THIS MISSION</p>
+      <nav data-toc-list></nav>
+    </aside>
+  </div>
+  <footer class="article-footer">
+    <div class="tag-list"><a href="/tags/Swift/"># Swift</a><a href="/tags/K%E7%BA%BF/"># K线</a><a href="/tags/iOS/"># iOS</a></div>
+    <div class="article-nav">
+      <a href="/2019/02/13/Mac%E5%BC%80%E5%8F%91App%E5%86%85%E5%90%AF%E7%94%A8Mail%E5%8F%91%E9%80%81%E5%B8%A6%E9%99%84%E4%BB%B6%E7%9A%84%E9%82%AE%E4%BB%B6/"><small>PREVIOUS LOG</small><strong>← Mac开发App内启用Mail发送带附件的邮件</strong></a>
+      
+    </div>
+  </footer>
+</article>
 
+</main>
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <footer class="site-footer">
+    <div>
+      <span class="status-dot"></span>
+      <span>MISSION SYSTEMS NOMINAL</span>
+    </div>
+    <p>The frontier is not a place. It is a decision to keep going.</p>
+    <span>© 2026 iOSPrincekin</span>
+  </footer>
 
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
+  <div class="search-panel" data-search-panel aria-hidden="true">
+    <button class="search-backdrop" type="button" data-search-close aria-label="关闭搜索"></button>
+    <section class="search-dialog" role="dialog" aria-modal="true" aria-label="搜索探索日志">
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+        <input type="search" placeholder="搜索技术、项目或关键词…" autocomplete="off" data-search-input>
+        <button type="button" data-search-close>ESC</button>
       </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
+      <div class="search-results" data-search-results>
+        <p class="search-hint">输入关键词，检索全部探索日志。</p>
       </div>
-    
-
-    
-
+    </section>
   </div>
 
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+  <script>window.ARES_ROOT = "/";</script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>
+
