@@ -6,11 +6,11 @@
   <meta name="theme-color" content="#07090f">
   <meta name="description" content="记录软件开发、系统设计与工程实践的人类火星探索主题技术博客">
   <title>MARS / DEV LOG</title>
-  <link rel="icon" type="image/svg+xml" sizes="any" href="/images/favicon.svg?v=20261107-002">
-  <link rel="shortcut icon" type="image/svg+xml" href="/images/favicon.svg?v=20261107-002">
-  <link rel="mask-icon" href="/images/favicon.svg?v=20261107-002" color="#d25b34">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=20261107-002">
-  <link rel="stylesheet" href="/css/main.css?v=20261107-002">
+  <link rel="icon" type="image/svg+xml" sizes="any" href="/images/favicon.svg?v=20261107-003">
+  <link rel="shortcut icon" type="image/svg+xml" href="/images/favicon.svg?v=20261107-003">
+  <link rel="mask-icon" href="/images/favicon.svg?v=20261107-003" color="#d25b34">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=20261107-003">
+  <link rel="stylesheet" href="/css/main.css?v=20261107-003">
 <meta name="generator" content="Hexo 8.1.2"></head>
 <body class="page-home">
   <div class="noise" aria-hidden="true"></div>
@@ -54,8 +54,48 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
         <span>搜索</span><kbd>⌘ K</kbd>
       </button>
+      <button class="mars-live-trigger" type="button" data-mars-open aria-expanded="false" aria-controls="mars-observatory">
+        <span class="mars-live-dot" aria-hidden="true"></span>
+        <span><b>MARS</b><small data-mars-trigger-status>实时位置</small></span>
+      </button>
     </nav>
   </header>
+
+  <aside class="mars-observatory" id="mars-observatory" data-mars-panel aria-hidden="true" aria-label="火星实时观测台">
+    <div class="mars-panel-head">
+      <div><small>LIVE EPHEMERIS</small><strong>火星实时观测台</strong></div>
+      <button type="button" data-mars-close aria-label="关闭火星实时观测台">×</button>
+    </div>
+    <div class="mars-visual">
+      <canvas width="220" height="220" data-mars-canvas aria-label="根据当前时间和地火几何关系绘制的动态火星模型"></canvas>
+      <div class="mars-bearing" aria-hidden="true"><span>N</span><i data-mars-bearing></i></div>
+      <div class="mars-visual-copy">
+        <strong data-mars-visibility>正在建立星历…</strong>
+        <small>实时计算视图 · 非相机直播</small>
+      </div>
+    </div>
+    <div class="mars-observer-row">
+      <span>观察点</span>
+      <strong data-observer-location>尚未获取位置</strong>
+      <button type="button" data-location-request>启用定位</button>
+    </div>
+    <dl class="mars-telemetry">
+      <div><dt>方位角 AZ</dt><dd data-mars-az>--</dd></div>
+      <div><dt>高度角 ALT</dt><dd data-mars-alt>--</dd></div>
+      <div><dt>赤经 RA</dt><dd data-mars-ra>--</dd></div>
+      <div><dt>赤纬 DEC</dt><dd data-mars-dec>--</dd></div>
+      <div><dt>黄经 / 黄纬</dt><dd data-mars-ecliptic>--</dd></div>
+      <div><dt>地火距离</dt><dd data-mars-distance>--</dd></div>
+      <div><dt>光行时间</dt><dd data-mars-light>--</dd></div>
+      <div><dt>视星等 / 照明</dt><dd data-mars-lighting>--</dd></div>
+    </dl>
+    <div class="mars-panel-foot">
+      <span data-mars-time>UTC --</span>
+      <span>ASTRONOMY ENGINE · ±1′</span>
+    </div>
+    <p class="mars-privacy">定位仅在你的浏览器内参与计算，不会上传或保存。</p>
+  </aside>
+  <button class="mars-panel-backdrop" type="button" data-mars-close aria-label="关闭火星实时观测台"></button>
 
   <main><section class="hero">
   <div class="hero-media" aria-hidden="true"></div>
@@ -201,7 +241,8 @@ PrincekinKlineFrame 是使用Swift语言编写的在iOS平台上运行的k线图
   </div>
 
   <script>window.ARES_ROOT = "/";</script>
-  <script src="/js/main.js?v=20261107-002" defer></script>
+  <script src="/js/astronomy.browser.min.js?v=20261107-003"></script>
+  <script src="/js/main.js?v=20261107-003" defer></script>
 </body>
 </html>
 
