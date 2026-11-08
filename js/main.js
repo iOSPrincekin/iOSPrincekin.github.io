@@ -159,6 +159,25 @@
       const primeMeridian = 176.630 + 350.89198226 * days;
       return rotateAxis3(rotateAxis1(rotateAxis3(vector, 90 + poleRa), 90 - poleDec), primeMeridian);
     };
+    const opportunitySurfaceEcliptic = date => {
+      const days = (date.getTime() - Date.UTC(2000, 0, 1, 12)) / 86400000;
+      const centuries = days / 36525;
+      const poleRa = 317.68143 - .1061 * centuries;
+      const poleDec = 52.88650 - .0609 * centuries;
+      const primeMeridian = 176.630 + 350.89198226 * days;
+      const latitude = -1.948282 * Math.PI / 180;
+      const longitude = 354.47417 * Math.PI / 180;
+      let vector = [Math.cos(latitude) * Math.cos(longitude), Math.cos(latitude) * Math.sin(longitude), Math.sin(latitude)];
+      vector = rotateAxis3(vector, -primeMeridian);
+      vector = rotateAxis1(vector, -(90 - poleDec));
+      vector = rotateAxis3(vector, -(90 + poleRa));
+      const obliquity = 23.43928 * Math.PI / 180;
+      return {
+        x: vector[0],
+        y: Math.cos(obliquity) * vector[1] + Math.sin(obliquity) * vector[2],
+        z: -Math.sin(obliquity) * vector[1] + Math.cos(obliquity) * vector[2]
+      };
+    };
     const calculateEarthFromOpportunity = date => {
       const A = window.Astronomy;
       const mars = A.HelioVector(A.Body.Mars, date);
@@ -206,18 +225,16 @@
       earthFromOpportunity = calculateEarthFromOpportunity(now);
       let equatorial;
       let horizontal = null;
-      let observerEcliptic = null;
 
       if (observerLocation) {
         const earthObserver = new A.Observer(observerLocation.latitude, observerLocation.longitude, observerLocation.height);
         equatorial = A.Equator(A.Body.Mars, now, earthObserver, true, true);
         horizontal = A.Horizon(now, earthObserver, equatorial.ra, equatorial.dec, 'normal');
-        observerEcliptic = A.RotateVector(eclipticRotation, A.ObserverVector(now, earthObserver, false));
       } else {
         equatorial = A.EquatorFromVector(geoVector);
       }
 
-      lastEphemeris = { illumination, horizontal, angularDiameter, earthHelio, marsHelio, observerEcliptic };
+      lastEphemeris = { illumination, horizontal, angularDiameter, earthHelio, marsHelio, opportunitySurface: opportunitySurfaceEcliptic(now) };
       fields.ra.textContent = formatRa(equatorial.ra);
       fields.dec.textContent = formatSignedDegree(equatorial.dec);
       fields.ecliptic.textContent = `${ecliptic.elon.toFixed(2)}° / ${formatSignedDegree(ecliptic.elat)}`;
@@ -303,11 +320,6 @@
       const phaseAngle = Math.acos(Math.max(-1, Math.min(1, earthFromOpportunity.phaseFraction * 2 - 1)));
       const rotation = (Date.now() / 86164090.5 * Math.PI * 2) % (Math.PI * 2);
       context.clearRect(0, 0, size, size);
-      const halo = context.createRadialGradient(center, center, radius * .7, center, center, radius * 1.9);
-      halo.addColorStop(0, 'rgba(142,225,255,.34)');
-      halo.addColorStop(1, 'rgba(84,179,255,0)');
-      context.fillStyle = halo;
-      context.fillRect(0, 0, size, size);
       const image = context.createImageData(size, size);
       for (let y = Math.floor(center - radius); y <= Math.ceil(center + radius); y++) {
         for (let x = Math.floor(center - radius); x <= Math.ceil(center + radius); x++) {
@@ -334,11 +346,6 @@
         }
       }
       context.putImageData(image, 0, 0);
-      context.strokeStyle = 'rgba(185,238,255,.55)';
-      context.lineWidth = 1;
-      context.beginPath();
-      context.arc(center, center, radius, 0, Math.PI * 2);
-      context.stroke();
     };
 
     const drawSolarSystem = timestamp => {
@@ -401,25 +408,22 @@
           drawPlanet(context, mars.x, mars.y, 11, { light: '#ff9460', base: '#c34e2e', dark: '#4b1b18', glow: 'rgba(210,91,52,.42)', text: '#f19770' }, 'MARS');
           drawPlanet(context, earth.x, earth.y, 13, { light: '#b7f0ff', base: '#277ca6', dark: '#0a284b', glow: 'rgba(82,188,230,.38)', text: '#8bd5eb' }, 'EARTH');
 
-          if (lastEphemeris.observerEcliptic) {
-            const vector = lastEphemeris.observerEcliptic;
-            const length = Math.hypot(vector.x, vector.y, vector.z) || 1;
-            const markerX = earth.x + vector.x / length * 10;
-            const markerY = earth.y - vector.y / length * 10;
+          if (lastEphemeris.opportunitySurface) {
+            const vector = lastEphemeris.opportunitySurface;
+            const markerX = mars.x + vector.x * 8;
+            const markerY = mars.y - vector.y * 8;
             const visibleSide = vector.z >= 0;
-            const pulse = 2.8 + .8 * (Math.sin(timestamp / 420) * .5 + .5);
-            context.strokeStyle = visibleSide ? '#ff4fd8' : 'rgba(255,79,216,.42)';
-            context.lineWidth = 1.4;
+            const pulse = 2.1 + .55 * (Math.sin(timestamp / 360) * .5 + .5);
+            const blink = .45 + .55 * (Math.sin(timestamp / 300) * .5 + .5);
+            context.strokeStyle = visibleSide ? `rgba(102,255,126,${blink})` : `rgba(102,255,126,${blink * .38})`;
+            context.lineWidth = 1;
             context.beginPath();
             context.arc(markerX, markerY, pulse, 0, Math.PI * 2);
             context.stroke();
-            context.fillStyle = '#ffdef8';
+            context.fillStyle = visibleSide ? `rgba(131,255,148,${blink})` : `rgba(131,255,148,${blink * .45})`;
             context.beginPath();
-            context.arc(markerX, markerY, 1.25, 0, Math.PI * 2);
+            context.arc(markerX, markerY, .9, 0, Math.PI * 2);
             context.fill();
-            context.fillStyle = '#ff74df';
-            context.font = '700 11px SFMono-Regular, Consolas, monospace';
-            context.fillText(visibleSide ? 'YOU' : 'YOU · FAR SIDE', earth.x + 18, earth.y + 25);
           }
         }
 
