@@ -86,8 +86,13 @@
       'az', 'alt', 'ra', 'dec', 'ecliptic', 'distance', 'light', 'lighting', 'visibility', 'time',
       'observer-location', 'mars-trigger-status', 'mars-bearing'
     ].map(name => [name, document.querySelector(`[data-${name.startsWith('mars-') || name.startsWith('observer-') ? name : `mars-${name}`}]`)]));
+    const earthView = document.querySelector('[data-earth-view]');
+    const earthCanvas = document.querySelector('[data-earth-canvas]');
+    const earthAzimuth = document.querySelector('[data-earth-azimuth]');
+    const earthAltitude = document.querySelector('[data-earth-altitude]');
     let observerLocation = null;
     let lastEphemeris = null;
+    let earthFromOpportunity = null;
     let locationRequested = false;
     let animationFrame = 0;
     let lastDraw = 0;
@@ -132,6 +137,60 @@
       return `${String(h).padStart(2, '0')}h ${String(Math.floor(minutes)).padStart(2, '0')}m`;
     };
     const compassPoint = azimuth => ['北', '东北', '东', '东南', '南', '西南', '西', '西北'][Math.round(azimuth / 45) % 8];
+    const compassPointEnglish = azimuth => ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'][Math.round(azimuth / 45) % 8];
+
+    const rotateAxis3 = (vector, degrees) => {
+      const angle = degrees * Math.PI / 180;
+      const cosine = Math.cos(angle);
+      const sine = Math.sin(angle);
+      return [cosine * vector[0] + sine * vector[1], -sine * vector[0] + cosine * vector[1], vector[2]];
+    };
+    const rotateAxis1 = (vector, degrees) => {
+      const angle = degrees * Math.PI / 180;
+      const cosine = Math.cos(angle);
+      const sine = Math.sin(angle);
+      return [vector[0], cosine * vector[1] + sine * vector[2], -sine * vector[1] + cosine * vector[2]];
+    };
+    const marsBodyFixed = (vector, date) => {
+      const days = (date.getTime() - Date.UTC(2000, 0, 1, 12)) / 86400000;
+      const centuries = days / 36525;
+      const poleRa = 317.68143 - .1061 * centuries;
+      const poleDec = 52.88650 - .0609 * centuries;
+      const primeMeridian = 176.630 + 350.89198226 * days;
+      return rotateAxis3(rotateAxis1(rotateAxis3(vector, 90 + poleRa), 90 - poleDec), primeMeridian);
+    };
+    const calculateEarthFromOpportunity = date => {
+      const A = window.Astronomy;
+      const mars = A.HelioVector(A.Body.Mars, date);
+      let earth = A.HelioVector(A.Body.Earth, date);
+      let distanceAu = Math.hypot(earth.x - mars.x, earth.y - mars.y, earth.z - mars.z);
+      const emissionDate = new Date(date.getTime() - distanceAu * 499.0047838 * 1000);
+      earth = A.HelioVector(A.Body.Earth, emissionDate);
+      const inertial = [earth.x - mars.x, earth.y - mars.y, earth.z - mars.z];
+      distanceAu = Math.hypot(...inertial);
+      const fixed = marsBodyFixed(inertial, date);
+      const latitude = -1.948282 * Math.PI / 180;
+      const longitude = 354.47417 * Math.PI / 180;
+      const east = [-Math.sin(longitude), Math.cos(longitude), 0];
+      const north = [-Math.sin(latitude) * Math.cos(longitude), -Math.sin(latitude) * Math.sin(longitude), Math.cos(latitude)];
+      const up = [Math.cos(latitude) * Math.cos(longitude), Math.cos(latitude) * Math.sin(longitude), Math.sin(latitude)];
+      const dot = (left, right) => left[0] * right[0] + left[1] * right[1] + left[2] * right[2];
+      const eastward = dot(fixed, east);
+      const northward = dot(fixed, north);
+      const upward = dot(fixed, up);
+      const azimuth = (Math.atan2(eastward, northward) * 180 / Math.PI + 360) % 360;
+      const altitude = Math.asin(upward / distanceAu) * 180 / Math.PI;
+      const earthToSun = [-earth.x, -earth.y, -earth.z];
+      const earthToMars = [mars.x - earth.x, mars.y - earth.y, mars.z - earth.z];
+      const phaseCosine = dot(earthToSun, earthToMars) / (Math.hypot(...earthToSun) * Math.hypot(...earthToMars));
+      return {
+        azimuth,
+        altitude,
+        distanceAu,
+        phaseFraction: (1 + Math.max(-1, Math.min(1, phaseCosine))) / 2,
+        angularDiameter: 2 * Math.atan(6378.137 / (distanceAu * AU_KM)) * 180 / Math.PI * 3600
+      };
+    };
 
     const updateMarsData = () => {
       const now = new Date();
@@ -144,6 +203,7 @@
       const marsHelio = A.RotateVector(eclipticRotation, A.HelioVector(A.Body.Mars, now));
       const distanceKm = illumination.geo_dist * AU_KM;
       const angularDiameter = 2 * Math.atan(MARS_RADIUS_KM / distanceKm) * 180 / Math.PI * 3600;
+      earthFromOpportunity = calculateEarthFromOpportunity(now);
       let equatorial;
       let horizontal = null;
       let observerEcliptic = null;
@@ -165,6 +225,14 @@
       fields.light.textContent = `${(distanceKm / LIGHT_KM_S / 60).toFixed(1)} 分钟`;
       fields.lighting.textContent = `${illumination.mag.toFixed(2)} mag / ${(illumination.phase_fraction * 100).toFixed(1)}%`;
       fields.time.textContent = `UTC ${now.toISOString().replace('T', ' ').slice(0, 19)}`;
+      if (earthAzimuth) earthAzimuth.textContent = `${earthFromOpportunity.azimuth.toFixed(2)}° / ${compassPointEnglish(earthFromOpportunity.azimuth)}`;
+      if (earthAltitude) earthAltitude.textContent = `${earthFromOpportunity.altitude >= 0 ? '+' : '−'}${Math.abs(earthFromOpportunity.altitude).toFixed(2)}° / ${earthFromOpportunity.altitude >= 0 ? 'VISIBLE' : 'BELOW HORIZON'}`;
+      if (earthView) {
+        const visible = earthFromOpportunity.altitude > 0;
+        earthView.hidden = !visible;
+        earthView.setAttribute('aria-hidden', String(!visible));
+        if (visible) earthView.style.top = `${Math.max(10, Math.min(43, 42 - earthFromOpportunity.altitude * .35))}%`;
+      }
 
       if (horizontal) {
         fields.az.textContent = `${horizontal.azimuth.toFixed(2)}° ${compassPoint(horizontal.azimuth)}`;
@@ -226,9 +294,57 @@
       context.fillText(label, x + radius + 8, y - radius - 5);
     };
 
+    const drawEarthFromMars = timestamp => {
+      if (!earthCanvas || !earthFromOpportunity || earthFromOpportunity.altitude <= 0) return;
+      const context = earthCanvas.getContext('2d');
+      const size = earthCanvas.width;
+      const center = size / 2;
+      const radius = size * .25;
+      const phaseAngle = Math.acos(Math.max(-1, Math.min(1, earthFromOpportunity.phaseFraction * 2 - 1)));
+      const rotation = (Date.now() / 86164090.5 * Math.PI * 2) % (Math.PI * 2);
+      context.clearRect(0, 0, size, size);
+      const halo = context.createRadialGradient(center, center, radius * .7, center, center, radius * 1.9);
+      halo.addColorStop(0, 'rgba(142,225,255,.34)');
+      halo.addColorStop(1, 'rgba(84,179,255,0)');
+      context.fillStyle = halo;
+      context.fillRect(0, 0, size, size);
+      const image = context.createImageData(size, size);
+      for (let y = Math.floor(center - radius); y <= Math.ceil(center + radius); y++) {
+        for (let x = Math.floor(center - radius); x <= Math.ceil(center + radius); x++) {
+          const nx = (x - center) / radius;
+          const ny = (center - y) / radius;
+          const rr = nx * nx + ny * ny;
+          if (rr > 1) continue;
+          const nz = Math.sqrt(1 - rr);
+          const longitude = Math.atan2(nx, nz) + rotation;
+          const latitude = Math.asin(ny);
+          const landSignal = Math.sin(longitude * 2.2 + Math.sin(latitude * 3.7)) + .55 * Math.sin(longitude * 5.4 - latitude * 4.1);
+          const cloudSignal = Math.sin(longitude * 8.1 + latitude * 13.7 + timestamp / 18000);
+          const light = Math.max(0, nx * Math.sin(phaseAngle) + nz * Math.cos(phaseAngle));
+          const limb = Math.pow(nz, .28);
+          const shade = (.035 + .965 * light) * (.6 + .4 * limb);
+          const land = landSignal > .62;
+          const cloud = cloudSignal > .78 && light > .05;
+          const color = cloud ? [214, 237, 244] : land ? [76, 137, 88] : [38, 113, 176];
+          const index = (y * size + x) * 4;
+          image.data[index] = color[0] * shade;
+          image.data[index + 1] = color[1] * shade;
+          image.data[index + 2] = color[2] * shade;
+          image.data[index + 3] = 255;
+        }
+      }
+      context.putImageData(image, 0, 0);
+      context.strokeStyle = 'rgba(185,238,255,.55)';
+      context.lineWidth = 1;
+      context.beginPath();
+      context.arc(center, center, radius, 0, Math.PI * 2);
+      context.stroke();
+    };
+
     const drawSolarSystem = timestamp => {
       if (timestamp - lastDraw > 65) {
         lastDraw = timestamp;
+        drawEarthFromMars(timestamp);
         const context = marsCanvas.getContext('2d');
         const width = marsCanvas.width;
         const height = marsCanvas.height;
@@ -291,18 +407,18 @@
             const markerX = earth.x + vector.x / length * 10;
             const markerY = earth.y - vector.y / length * 10;
             const visibleSide = vector.z >= 0;
-            const pulse = 4.5 + 1.8 * (Math.sin(timestamp / 420) * .5 + .5);
-            context.strokeStyle = visibleSide ? '#9af7ff' : 'rgba(154,247,255,.45)';
-            context.lineWidth = 2;
+            const pulse = 2.8 + .8 * (Math.sin(timestamp / 420) * .5 + .5);
+            context.strokeStyle = visibleSide ? '#ff4fd8' : 'rgba(255,79,216,.42)';
+            context.lineWidth = 1.4;
             context.beginPath();
             context.arc(markerX, markerY, pulse, 0, Math.PI * 2);
             context.stroke();
-            context.fillStyle = '#efffff';
+            context.fillStyle = '#ffdef8';
             context.beginPath();
-            context.arc(markerX, markerY, 2.4, 0, Math.PI * 2);
+            context.arc(markerX, markerY, 1.25, 0, Math.PI * 2);
             context.fill();
-            context.fillStyle = '#9af7ff';
-            context.font = '700 13px SFMono-Regular, Consolas, monospace';
+            context.fillStyle = '#ff74df';
+            context.font = '700 11px SFMono-Regular, Consolas, monospace';
             context.fillText(visibleSide ? 'YOU' : 'YOU · FAR SIDE', earth.x + 18, earth.y + 25);
           }
         }

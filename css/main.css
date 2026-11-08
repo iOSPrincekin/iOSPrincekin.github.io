@@ -113,10 +113,11 @@ img { max-width: 100%; }
 .scroll-cue { position: absolute; z-index: 2; left: 44px; bottom: 34px; display: flex; align-items: center; gap: 12px; color: #777f8b; font: 8px var(--mono); letter-spacing: .18em; }
 .scroll-cue span { width: 34px; height: 34px; border: 1px solid var(--line-bright); border-radius: 50%; position: relative; }
 .scroll-cue span::after { content: "↓"; position: absolute; inset: 0; display: grid; place-items: center; color: white; }
-.hero-orbit { position: absolute; z-index: 2; right: 11%; top: 17%; width: 230px; height: 230px; border: 1px solid rgba(255,255,255,.09); border-radius: 50%; transform: rotate(-18deg); }
-.hero-orbit::before, .hero-orbit::after { content: ""; position: absolute; inset: 23px; border: 1px solid rgba(255,255,255,.05); border-radius: 50%; }
-.hero-orbit::after { inset: -11px 48px; }
-.hero-orbit span { position: absolute; top: 23px; left: 36px; width: 5px; height: 5px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 12px var(--signal); }
+.hero-earth-view { position: absolute; z-index: 3; right: 13%; top: 20%; width: 150px; display: flex; flex-direction: column; align-items: center; color: #a9e9f2; filter: drop-shadow(0 0 18px rgba(115,212,221,.18)); transition: top 1.2s ease, opacity .5s; }
+.hero-earth-view[hidden] { display: none; }
+.hero-earth-view canvas { width: 112px; height: 112px; }
+.hero-earth-view span { margin-top: -5px; font: 700 8px var(--mono); letter-spacing: .16em; }
+.hero-earth-view small { margin-top: 5px; color: rgba(167,181,198,.55); font: 6px var(--mono); letter-spacing: .1em; }
 
 .section-shell { width: var(--shell); margin: 0 auto; }
 .mission-section, .logs-section, .domains-section { padding: 140px 0; }
@@ -245,7 +246,8 @@ img { max-width: 100%; }
   .mars-observatory { top: 76px; right: 10px; width: calc(100vw - 20px); max-height: calc(100svh - 86px); }
   .hero { min-height: 820px; align-items: flex-start; }.hero-media { background-position: 69% center; }.hero-overlay { background: linear-gradient(90deg, rgba(5,7,12,.92), rgba(5,7,12,.26)), linear-gradient(0deg, rgba(5,7,12,.88), transparent 45%, rgba(5,7,12,.2)); }
   .hero-content { margin-top: 165px; }.hero h1 { font-size: clamp(50px, 16vw, 72px); line-height: .94; }.hero-lead { max-width: 92%; font-size: 15px; line-height: 1.75; }.hero-actions { align-items: stretch; flex-direction: column; max-width: 280px; }
-  .hero-telemetry { left: 18px; right: 18px; bottom: 28px; gap: 0; justify-content: space-between; }.hero-telemetry div:nth-child(2) { display: none; }.scroll-cue, .hero-orbit { display: none; }
+  .hero-telemetry { left: 18px; right: 18px; bottom: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 14px; }.hero-telemetry strong { font-size: 7px; line-height: 1.45; }.scroll-cue { display: none; }
+  .hero-earth-view { right: 6%; top: 20%; width: 105px; }.hero-earth-view canvas { width: 82px; height: 82px; }.hero-earth-view small { display: none; }
   .mission-section, .logs-section, .domains-section { padding: 90px 0; }.section-heading { margin-bottom: 45px; }.section-heading.row { align-items: flex-start; flex-direction: column; gap: 25px; }.section-heading h2 { font-size: 39px; }
   .mission-card { grid-template-columns: 1fr; }.radar { width: 170px; margin: 42px auto 10px; }.mission-card ul { padding: 20px 30px 35px; }
   .post-grid { grid-template-columns: 1fr; }.post-card { min-height: 350px; }
