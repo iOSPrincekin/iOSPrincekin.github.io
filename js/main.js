@@ -91,6 +91,7 @@
     let locationRequested = false;
     let animationFrame = 0;
     let lastDraw = 0;
+    let orbitPaths = null;
 
     const setPanelOpen = open => {
       marsPanel.classList.toggle('open', open);
@@ -138,20 +139,25 @@
       const geoVector = A.GeoVector(A.Body.Mars, now, true);
       const ecliptic = A.Ecliptic(geoVector);
       const illumination = A.Illumination(A.Body.Mars, now);
+      const eclipticRotation = A.Rotation_EQJ_ECL();
+      const earthHelio = A.RotateVector(eclipticRotation, A.HelioVector(A.Body.Earth, now));
+      const marsHelio = A.RotateVector(eclipticRotation, A.HelioVector(A.Body.Mars, now));
       const distanceKm = illumination.geo_dist * AU_KM;
       const angularDiameter = 2 * Math.atan(MARS_RADIUS_KM / distanceKm) * 180 / Math.PI * 3600;
       let equatorial;
       let horizontal = null;
+      let observerEcliptic = null;
 
       if (observerLocation) {
         const earthObserver = new A.Observer(observerLocation.latitude, observerLocation.longitude, observerLocation.height);
         equatorial = A.Equator(A.Body.Mars, now, earthObserver, true, true);
         horizontal = A.Horizon(now, earthObserver, equatorial.ra, equatorial.dec, 'normal');
+        observerEcliptic = A.RotateVector(eclipticRotation, A.ObserverVector(now, earthObserver, false));
       } else {
         equatorial = A.EquatorFromVector(geoVector);
       }
 
-      lastEphemeris = { illumination, horizontal, angularDiameter };
+      lastEphemeris = { illumination, horizontal, angularDiameter, earthHelio, marsHelio, observerEcliptic };
       fields.ra.textContent = formatRa(equatorial.ra);
       fields.dec.textContent = formatSignedDegree(equatorial.dec);
       fields.ecliptic.textContent = `${ecliptic.elon.toFixed(2)}° / ${formatSignedDegree(ecliptic.elat)}`;
@@ -176,56 +182,137 @@
       }
     };
 
-    const drawMars = timestamp => {
+    const buildOrbit = (body, periodDays, date) => {
+      const A = window.Astronomy;
+      const rotation = A.Rotation_EQJ_ECL();
+      const start = date.getTime() - periodDays * 86400000 / 2;
+      return Array.from({ length: 241 }, (_, index) => {
+        const sampleDate = new Date(start + periodDays * 86400000 * index / 240);
+        return A.RotateVector(rotation, A.HelioVector(body, sampleDate));
+      });
+    };
+
+    const drawOrbitPath = (context, path, centerX, centerY, scale, color) => {
+      context.beginPath();
+      path.forEach((point, index) => {
+        const x = centerX + point.x * scale;
+        const y = centerY - point.y * scale;
+        if (index) context.lineTo(x, y); else context.moveTo(x, y);
+      });
+      context.closePath();
+      context.strokeStyle = color;
+      context.lineWidth = 1.2;
+      context.stroke();
+    };
+
+    const drawPlanet = (context, x, y, radius, colors, label) => {
+      const glow = context.createRadialGradient(x, y, radius * .5, x, y, radius * 2.4);
+      glow.addColorStop(0, colors.glow);
+      glow.addColorStop(1, 'rgba(0,0,0,0)');
+      context.fillStyle = glow;
+      context.beginPath();
+      context.arc(x, y, radius * 2.4, 0, Math.PI * 2);
+      context.fill();
+      const sphere = context.createRadialGradient(x - radius * .35, y - radius * .4, radius * .1, x, y, radius);
+      sphere.addColorStop(0, colors.light);
+      sphere.addColorStop(.58, colors.base);
+      sphere.addColorStop(1, colors.dark);
+      context.fillStyle = sphere;
+      context.beginPath();
+      context.arc(x, y, radius, 0, Math.PI * 2);
+      context.fill();
+      context.fillStyle = colors.text;
+      context.font = '600 15px SFMono-Regular, Consolas, monospace';
+      context.fillText(label, x + radius + 8, y - radius - 5);
+    };
+
+    const drawSolarSystem = timestamp => {
       if (timestamp - lastDraw > 65) {
         lastDraw = timestamp;
         const context = marsCanvas.getContext('2d');
-        const size = marsCanvas.width;
-        const center = size / 2;
-        const radius = size * .34;
-        context.clearRect(0, 0, size, size);
+        const width = marsCanvas.width;
+        const height = marsCanvas.height;
+        const centerX = width / 2;
+        const centerY = height / 2 - 8;
+        const scale = Math.min(width, height) * .25;
+        context.clearRect(0, 0, width, height);
 
-        const halo = context.createRadialGradient(center, center, radius * .7, center, center, radius * 1.45);
-        halo.addColorStop(0, 'rgba(210,91,52,.18)');
-        halo.addColorStop(1, 'rgba(210,91,52,0)');
-        context.fillStyle = halo;
-        context.fillRect(0, 0, size, size);
+        for (let index = 0; index < 70; index++) {
+          const x = (Math.sin(index * 91.73) * .5 + .5) * width;
+          const y = (Math.sin(index * 47.19 + 2.4) * .5 + .5) * height;
+          const twinkle = .18 + .22 * (Math.sin(timestamp / 900 + index) * .5 + .5);
+          context.fillStyle = `rgba(190,215,235,${twinkle})`;
+          context.fillRect(x, y, index % 9 === 0 ? 2 : 1, index % 9 === 0 ? 2 : 1);
+        }
 
-        const phaseAngle = (lastEphemeris?.illumination.phase_angle || 0) * Math.PI / 180;
-        const rotation = (Date.now() / 88775244 * Math.PI * 2) % (Math.PI * 2);
-        const image = context.createImageData(size, size);
-        for (let y = Math.floor(center - radius); y <= Math.ceil(center + radius); y++) {
-          for (let x = Math.floor(center - radius); x <= Math.ceil(center + radius); x++) {
-            const nx = (x - center) / radius;
-            const ny = (center - y) / radius;
-            const rr = nx * nx + ny * ny;
-            if (rr > 1) continue;
-            const nz = Math.sqrt(1 - rr);
-            const longitude = Math.atan2(nx, nz) + rotation;
-            const latitude = Math.asin(ny);
-            const terrain = Math.sin(longitude * 3.1 + Math.sin(latitude * 4.4)) * .5
-              + Math.sin(longitude * 8.7 - latitude * 5.3) * .24
-              + Math.sin(longitude * 17.3 + latitude * 11.1) * .11;
-            const light = Math.max(0, nx * Math.sin(phaseAngle) + nz * Math.cos(phaseAngle));
-            const limb = Math.pow(nz, .35);
-            const shade = (.055 + .945 * light) * (.55 + .45 * limb);
-            const polar = Math.max(0, (Math.abs(latitude) - 1.25) * 4.2);
-            const base = terrain > .28 ? [103, 43, 31] : terrain < -.36 ? [77, 31, 25] : [192, 75, 42];
-            const index = (y * size + x) * 4;
-            image.data[index] = Math.min(255, base[0] * shade + polar * 95);
-            image.data[index + 1] = Math.min(255, base[1] * shade + polar * 95);
-            image.data[index + 2] = Math.min(255, base[2] * shade + polar * 100);
-            image.data[index + 3] = 255;
+        if (!orbitPaths) {
+          const date = new Date();
+          orbitPaths = {
+            earth: buildOrbit(window.Astronomy.Body.Earth, 365.256, date),
+            mars: buildOrbit(window.Astronomy.Body.Mars, 686.98, date)
+          };
+        }
+        drawOrbitPath(context, orbitPaths.mars, centerX, centerY, scale, 'rgba(210,91,52,.28)');
+        drawOrbitPath(context, orbitPaths.earth, centerX, centerY, scale, 'rgba(115,212,221,.28)');
+
+        const sunGlow = context.createRadialGradient(centerX, centerY, 3, centerX, centerY, 42);
+        sunGlow.addColorStop(0, 'rgba(255,248,190,1)');
+        sunGlow.addColorStop(.18, 'rgba(255,182,70,.9)');
+        sunGlow.addColorStop(1, 'rgba(255,126,32,0)');
+        context.fillStyle = sunGlow;
+        context.beginPath();
+        context.arc(centerX, centerY, 42, 0, Math.PI * 2);
+        context.fill();
+        context.fillStyle = '#fff2bd';
+        context.beginPath();
+        context.arc(centerX, centerY, 10, 0, Math.PI * 2);
+        context.fill();
+        context.fillStyle = 'rgba(255,199,97,.8)';
+        context.font = '600 14px SFMono-Regular, Consolas, monospace';
+        context.fillText('SUN', centerX + 17, centerY + 5);
+
+        if (lastEphemeris?.earthHelio && lastEphemeris?.marsHelio) {
+          const earth = { x: centerX + lastEphemeris.earthHelio.x * scale, y: centerY - lastEphemeris.earthHelio.y * scale };
+          const mars = { x: centerX + lastEphemeris.marsHelio.x * scale, y: centerY - lastEphemeris.marsHelio.y * scale };
+          context.setLineDash([5, 7]);
+          context.strokeStyle = 'rgba(210,224,235,.18)';
+          context.beginPath();
+          context.moveTo(earth.x, earth.y);
+          context.lineTo(mars.x, mars.y);
+          context.stroke();
+          context.setLineDash([]);
+
+          drawPlanet(context, mars.x, mars.y, 11, { light: '#ff9460', base: '#c34e2e', dark: '#4b1b18', glow: 'rgba(210,91,52,.42)', text: '#f19770' }, 'MARS');
+          drawPlanet(context, earth.x, earth.y, 13, { light: '#b7f0ff', base: '#277ca6', dark: '#0a284b', glow: 'rgba(82,188,230,.38)', text: '#8bd5eb' }, 'EARTH');
+
+          if (lastEphemeris.observerEcliptic) {
+            const vector = lastEphemeris.observerEcliptic;
+            const length = Math.hypot(vector.x, vector.y, vector.z) || 1;
+            const markerX = earth.x + vector.x / length * 10;
+            const markerY = earth.y - vector.y / length * 10;
+            const visibleSide = vector.z >= 0;
+            const pulse = 4.5 + 1.8 * (Math.sin(timestamp / 420) * .5 + .5);
+            context.strokeStyle = visibleSide ? '#9af7ff' : 'rgba(154,247,255,.45)';
+            context.lineWidth = 2;
+            context.beginPath();
+            context.arc(markerX, markerY, pulse, 0, Math.PI * 2);
+            context.stroke();
+            context.fillStyle = '#efffff';
+            context.beginPath();
+            context.arc(markerX, markerY, 2.4, 0, Math.PI * 2);
+            context.fill();
+            context.fillStyle = '#9af7ff';
+            context.font = '700 13px SFMono-Regular, Consolas, monospace';
+            context.fillText(visibleSide ? 'YOU' : 'YOU · FAR SIDE', earth.x + 18, earth.y + 25);
           }
         }
-        context.putImageData(image, 0, 0);
-        context.strokeStyle = 'rgba(255,146,94,.35)';
-        context.lineWidth = 1;
-        context.beginPath();
-        context.arc(center, center, radius, 0, Math.PI * 2);
-        context.stroke();
+
+        context.fillStyle = 'rgba(145,158,175,.65)';
+        context.font = '12px SFMono-Regular, Consolas, monospace';
+        context.fillText('HELIOCENTRIC ECLIPTIC VIEW · LIVE 1:1', 20, 25);
+        context.fillText('ORBITS TO SCALE · PLANETS ENLARGED', 20, 43);
       }
-      animationFrame = requestAnimationFrame(drawMars);
+      animationFrame = requestAnimationFrame(drawSolarSystem);
     };
 
     marsTrigger.addEventListener('click', () => setPanelOpen(!marsPanel.classList.contains('open')));
@@ -234,7 +321,7 @@
     document.addEventListener('keydown', event => { if (event.key === 'Escape' && marsPanel.classList.contains('open')) setPanelOpen(false); });
     updateMarsData();
     setInterval(updateMarsData, 10000);
-    animationFrame = requestAnimationFrame(drawMars);
+    animationFrame = requestAnimationFrame(drawSolarSystem);
     window.addEventListener('pagehide', () => cancelAnimationFrame(animationFrame), { once: true });
   }
 })();

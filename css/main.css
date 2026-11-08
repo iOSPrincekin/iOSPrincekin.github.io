@@ -65,7 +65,7 @@ img { max-width: 100%; }
 .mars-panel-head strong { font-size: 15px; }
 .mars-panel-head button { width: 34px; height: 34px; padding: 0; color: var(--muted); background: transparent; border: 1px solid var(--line); cursor: pointer; font-size: 22px; font-weight: 200; line-height: 1; }
 .mars-visual { position: relative; min-height: 245px; display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at center, rgba(210,91,52,.07), transparent 50%), linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: auto, 34px 34px, 34px 34px; border-bottom: 1px solid var(--line); }
-.mars-visual canvas { display: block; width: 220px; height: 220px; }
+.mars-visual canvas { display: block; width: 100%; height: auto; }
 .mars-bearing { position: absolute; right: 22px; top: 22px; width: 42px; height: 42px; border: 1px solid rgba(115,212,221,.3); border-radius: 50%; }
 .mars-bearing span { position: absolute; left: 50%; top: -13px; color: var(--signal); transform: translateX(-50%); font: 7px var(--mono); }
 .mars-bearing i { position: absolute; left: 20px; top: 4px; width: 1px; height: 17px; background: linear-gradient(var(--signal), transparent); transform-origin: 50% 17px; transition: transform .8s ease; }
