@@ -75,6 +75,53 @@
   }), { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
 
+  const brandMars = document.querySelector('[data-brand-mars]');
+  if (brandMars) {
+    const context = brandMars.getContext('2d');
+    const size = brandMars.width;
+    const center = size / 2;
+    const radius = 18;
+    let lastBrandDraw = 0;
+    let brandAnimationFrame = 0;
+    const drawBrandMars = timestamp => {
+      if (timestamp - lastBrandDraw >= 90) {
+        lastBrandDraw = timestamp;
+        const daysSinceJ2000 = (Date.now() - Date.UTC(2000, 0, 1, 12)) / 86400000;
+        const centralMeridian = (176.630 + 350.89198226 * daysSinceJ2000) * Math.PI / 180;
+        const image = context.createImageData(size, size);
+        for (let y = Math.floor(center - radius); y <= Math.ceil(center + radius); y++) {
+          for (let x = Math.floor(center - radius); x <= Math.ceil(center + radius); x++) {
+            const nx = (x - center) / radius;
+            const ny = (center - y) / radius;
+            const rr = nx * nx + ny * ny;
+            if (rr > 1) continue;
+            const nz = Math.sqrt(1 - rr);
+            const longitude = Math.atan2(nx, nz) + centralMeridian;
+            const latitude = Math.asin(ny);
+            const terrain = Math.sin(longitude * 2.7 + Math.sin(latitude * 4.2)) * .5
+              + Math.sin(longitude * 7.3 - latitude * 5.1) * .25
+              + Math.sin(longitude * 14.9 + latitude * 9.7) * .12;
+            const sunlight = Math.max(0, nx * -.42 + ny * .32 + nz * .85);
+            const limb = Math.pow(nz, .32);
+            const shade = (.1 + .9 * sunlight) * (.56 + .44 * limb);
+            const polarCap = Math.max(0, (Math.abs(latitude) - 1.28) * 6);
+            const color = terrain > .28 ? [116, 39, 27] : terrain < -.34 ? [92, 31, 24] : [211, 78, 42];
+            const index = (y * size + x) * 4;
+            image.data[index] = Math.min(255, color[0] * shade + polarCap * 80);
+            image.data[index + 1] = Math.min(255, color[1] * shade + polarCap * 72);
+            image.data[index + 2] = Math.min(255, color[2] * shade + polarCap * 68);
+            image.data[index + 3] = 255;
+          }
+        }
+        context.clearRect(0, 0, size, size);
+        context.putImageData(image, 0, 0);
+      }
+      brandAnimationFrame = requestAnimationFrame(drawBrandMars);
+    };
+    brandAnimationFrame = requestAnimationFrame(drawBrandMars);
+    window.addEventListener('pagehide', () => cancelAnimationFrame(brandAnimationFrame), { once: true });
+  }
+
   const marsPanel = document.querySelector('[data-mars-panel]');
   const marsTrigger = document.querySelector('[data-mars-open]');
   const marsCanvas = document.querySelector('[data-mars-canvas]');

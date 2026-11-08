@@ -31,10 +31,9 @@ img { max-width: 100%; }
 .site-header.scrolled, .page-inner .site-header, .page-post .site-header { height: 72px; background: rgba(7, 9, 15, .88); border-color: var(--line); backdrop-filter: blur(18px); }
 .brand { display: flex; align-items: center; gap: 13px; position: relative; z-index: 2; }
 .brand-mark { position: relative; width: 52px; height: 52px; display: block; flex: 0 0 auto; }
-.brand-mark svg { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 8px rgba(210, 91, 52, .12)); }
+.brand-mark svg { position: absolute; z-index: 2; inset: 0; display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 8px rgba(210, 91, 52, .12)); }
 .brand-orbit { fill: none; stroke: rgba(178, 193, 208, .44); stroke-width: 1.15; stroke-dasharray: 2.4 1.8; }
-.brand-planet { fill: url(#brand-mars); filter: drop-shadow(0 0 4px rgba(210, 91, 52, .45)); }
-.brand-continent { fill: rgba(91, 26, 20, .42); }
+.brand-mars-live { position: absolute; z-index: 1; inset: 0; display: block; width: 52px; height: 52px; filter: drop-shadow(0 0 4px rgba(210,91,52,.5)); }
 .brand-flight-ring { position: absolute; z-index: 3; inset: 0; display: block; pointer-events: none; }
 .brand-starship { position: absolute; top: 0; left: 0; display: block; width: 13px; height: 5px; offset-path: path("M5 32C8 19 19 10 33 8C45 6 51 11 47 21C43 31 32 39 19 41C8 43 2 39 5 32Z"); offset-anchor: center; offset-rotate: auto 0deg; will-change: offset-distance; background: linear-gradient(180deg, #ffffff 0%, #b9bec2 28%, #6f767b 54%, #e7eaec 78%, #9da3a7 100%); clip-path: polygon(0 28%, 74% 0, 100% 50%, 74% 100%, 0 72%); box-shadow: 0 0 2px rgba(255,255,255,.68); animation: flyOrbit 15s linear infinite; }
 .brand-starship::before { content: ""; position: absolute; left: 2px; top: 2.5px; width: 6px; height: 4px; background: linear-gradient(135deg, #d9dcde, #6f7478); clip-path: polygon(0 0, 100% 70%, 20% 100%); filter: drop-shadow(0 1px 1px rgba(0,0,0,.42)); }
