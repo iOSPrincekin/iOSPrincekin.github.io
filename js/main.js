@@ -198,7 +198,7 @@
       burst.setAttribute('aria-hidden', 'true');
       burst.style.left = `${event.clientX}px`;
       burst.style.top = `${event.clientY}px`;
-      burst.innerHTML = `<span class="article-click-icon">${burstIcons[Math.floor(Math.random() * burstIcons.length)]}</span>${Array.from({ length: 6 }, (_, index) => `<i style="--spark-angle:${index * 60 + Math.random() * 18}deg;--spark-distance:${26 + Math.random() * 18}px"></i>`).join('')}`;
+      burst.innerHTML = `<span class="article-click-icon">${burstIcons[Math.floor(Math.random() * burstIcons.length)]}</span>${Array.from({ length: 6 }, (_, index) => `<i style="--spark-angle:${index * 60 + Math.random() * 18}deg;--spark-distance:${18 + Math.random() * 12}px"></i>`).join('')}`;
       document.body.appendChild(burst);
       burst.addEventListener('animationend', () => burst.remove(), { once: true });
       setTimeout(() => burst.remove(), 1400);
