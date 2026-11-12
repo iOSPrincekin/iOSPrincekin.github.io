@@ -7,6 +7,114 @@
   const searchResults = document.querySelector('[data-search-results]');
   let searchData = null;
 
+  const translations = new Map([
+    ['Home', '首页'], ['Logs', '探索日志'], ['Domains', '技术领域'], ['Projects', '项目档案'], ['About', '关于'],
+    ['THE MISSION', '任务目标'], ['LATEST TRANSMISSIONS', '最新传输'], ['EXPLORATION DOMAINS', '探索领域'],
+    ['FIELD NOTE / 001', '现场记录 / 001'], ['KEEP BUILDING', '持续构建'], ['KEEP EXPLORING', '持续探索'],
+    ['MISSION SYSTEMS NOMINAL', '任务系统运行正常'], ['The frontier is not a place. It is a decision to keep going.', '边疆不是一个地点，而是继续前进的决定。'],
+    ['TRANSMISSION ARCHIVE', '传输档案'], ['MISSION DOCUMENT', '任务文档'], ['ON THIS MISSION', '本次任务'],
+    ['PREVIOUS LOG', '上一篇日志'], ['NEXT LOG', '下一篇日志'],
+    ['SEARCH', '搜索'], ['LIVE POSITION', '实时位置'], ['LIVE MARS OBSERVATORY', '火星实时观测台'],
+    ['CALCULATING EPHEMERIS…', '正在建立星历…'], ['REAL TIME 1:1 · PLANETS VISUALLY ENLARGED', '真实时间 1:1 · 行星视觉放大'],
+    ['OBSERVER', '观察点'], ['LOCATION NOT AVAILABLE', '尚未获取位置'], ['ENABLE LOCATION', '启用定位'],
+    ['AZIMUTH AZ', '方位角 AZ'], ['ALTITUDE ALT', '高度角 ALT'], ['RIGHT ASCENSION RA', '赤经 RA'],
+    ['DECLINATION DEC', '赤纬 DEC'], ['ECLIPTIC LON / LAT', '黄经 / 黄纬'], ['EARTH–MARS DISTANCE', '地火距离'],
+    ['LIGHT TIME', '光行时间'], ['MAGNITUDE / ILLUMINATION', '视星等 / 照明'],
+    ['Your location is used only for calculations in this browser. It is never uploaded or stored.', '定位仅在你的浏览器内参与计算，不会上传或保存。'],
+    ['Enter a keyword to search every exploration log.', '输入关键词，检索全部探索日志。'],
+    ['CODE THE UNKNOWN', '向未知编程'],
+    ['Software is our starship. Curiosity is our fuel. Every engineering expedition carries humanity one step closer to Mars.', '以软件为飞船，以好奇心为燃料。记录每一次技术探索，也记录人类走向火星的勇气。'],
+    ['READ THE LOGS', '阅读探索日志'], ['VIEW PROJECTS', '查看项目档案'],
+    ['CODE IS OUR MOST RELIABLE', '代码是抵达未知世界'], ['VEHICLE INTO THE UNKNOWN', '最可靠的航行工具'],
+    ['Exploring the space between code, systems, and products—turning complex problems into reliable, clear, and reusable engineering practice.', '在代码、系统与产品之间持续探索，把复杂问题转化为可靠、清晰、可复用的工程实践。'],
+    ['This site records real software problems, design decisions, and implementation details. Every article is a mission review: from discovering an anomaly, to building a model, to making the system run reliably.', '这里收录软件开发中的真实问题、设计判断与实现细节。每一篇文章都是一次任务复盘：从发现异常，到建立模型，再到让系统稳定运行。'],
+    ['LEARN ABOUT THE LONG MISSION', '了解这次长期任务'], ['STAY CURIOUS', '保持好奇'], ['SEEK CLARITY', '追求清晰'],
+    ['TEST WITH COURAGE', '勇于验证'], ['LATEST EXPLORATION LOGS', '最新探索日志'], ['VIEW ALL LOGS', '查看全部日志'],
+    ['FIELDS OF CONTINUOUS EXPLORATION', '持续深入的技术领域'], ['MOBILE DEVELOPMENT', '移动开发'], ['SYSTEM DESIGN', '系统设计'],
+    ['ENGINEERING TOOLS', '工程效率'], ['INTELLIGENT SYSTEMS', '智能探索'],
+    ['Swift · iOS · Interaction · Performance', 'Swift · iOS · 交互与性能'], ['Architecture · Concurrency · Reliability', '架构 · 并发 · 可靠性'],
+    ['Automation · Toolchains · Developer Experience', '自动化 · 工具链 · 开发体验'], ['AI · Data · Emerging Interfaces', 'AI · 数据 · 新型交互'],
+    ['“Exploration is not the certainty of safety ahead,', '“真正的探索，不是确信前方安全，'], ['but the decision to move forward through the unknown.”', '而是在未知中仍然选择向前。”'],
+    ['Exploration Logs', '探索日志'], ['Every technical transmission, ordered by arrival time.', '所有技术记录，按抵达时间排序。'],
+    ['Exploration Domains', '技术领域'], ['An engineering map organized by problem space.', '按问题空间整理的工程探索地图。'],
+    ['New technical domains are being surveyed.', '新的技术领域正在勘测中。'], ['← BACK TO EXPLORATION LOGS', '← 返回探索日志'],
+    ['About This Long Mission', '关于这次长期任务'], ['Why Mars?', '为什么是火星'],
+    ['Mars represents a simple engineering spirit: acknowledge the unknown, respect the constraints, and turn the impossible into testable problems one step at a time.', '火星代表一种很朴素的工程精神：承认未知，尊重约束，然后一步一步把不可能变成可以验证的问题。'],
+    ['This site documents my software development expeditions. It focuses on real engineering problems: mobile development, system design, toolchains, performance, reliability, and the details that reshape how I think about building software well.', '这个网站用于记录我的软件开发探索。内容关注真实的工程问题，包括移动开发、系统设计、工具链、性能、可靠性，以及那些让我重新理解“如何把软件做好”的细节。'],
+    ['Writing Principles', '写作原则'], ['Start with the problem, its constraints, and the reasoning behind each decision.', '从问题出发，交代限制条件与判断过程。'],
+    ['Provide reproducible code, data, or verification methods.', '给出可以复现的代码、数据或验证方法。'], ['Document failed paths; they are often more valuable than the final answer.', '记录失败路径，因为它们往往比最终答案更有价值。'],
+    ["Respect the reader's time and keep complex ideas clear.", '尊重读者的时间，让复杂概念保持清晰。'], ['Stay in Contact', '保持联络'],
+    ['Respect the reader’s time and keep complex ideas clear.', '尊重读者的时间，让复杂概念保持清晰。'],
+    ['Every article is a mission log transmitted from the field. If you are facing the same problem, I hope these notes become a useful map.', '每一篇文章都是一份从现场发回的任务日志。如果其中某个问题也在困扰你，希望这里的记录能成为一张有用的地图。'],
+    ['Project Archive', '项目档案'], ['Software Projects Are Executable Thought', '软件项目是可运行的思考'],
+    ['This archive collects representative development projects, architecture experiments, and open-source practice. Each record explains its goals, constraints, technical choices, implementation, and lessons learned.', '这里将收录具有代表性的开发项目、架构实验和开源实践。每份档案会说明项目目标、关键约束、技术选择、实现过程与最终复盘。'],
+    ['An iOS candlestick chart component covering data visualization, interaction, and real-time updates. Related engineering notes are available in the exploration logs.', '面向 iOS 的 K 线图组件实践，涵盖数据展示、交互和实时更新。相关技术记录可在探索日志中查看。'],
+    ['Next Mission', '下一项任务'], ['New project records are being prepared. Complete case studies in mobile engineering, developer tools, and intelligent systems will follow.', '新的项目档案正在整理。后续会逐步加入移动端工程、开发工具与智能系统方向的完整案例。'],
+    ['Build Your Own macOS Kernel — Results', '编译自己的 macOS 内核——成果篇'], ['Background', '背景'], ['Results', '成果展示'],
+    ['Project Status', '项目完成情况'], ['Status', '状态'], ['Item', '事项'], ['Notes', '说明'],
+    ['macOS is an excellent operating system, yet many iOS and macOS developers only encounter operating-system internals in documentation. Working directly with the macOS kernel source is difficult and demanding. After a long investigation, I completed that journey and built a macOS system with my own startup program and kernel.', 'macOS 是一款优秀的操作系统，很多 iOS/macOS 开发者对操作系统的了解仅限于资料。直接与 macOS 内核源代码交互困难且充满挑战。经过长期探索，我完成了这项工作，构建出使用自定义启动程序和内核的 macOS 系统。'],
+    ['The screenshot shows macOS running with my compiled versions of', '从图中可以看到，macOS 正在使用我自行编译的'], ['two protected components that cannot normally be replaced in a standard system.', '这两个受保护的系统组件在标准系统中通常无法被替换。'],
+    ["The table below separates completed results from the work that remains. To avoid ambiguity, installing Apple's original macOS on real hardware is listed separately from running the custom kernel on real hardware.", '下面分别列出已经完成的成果和仍需推进的工作。为避免误解，Apple 原版 macOS 的真机安装与自定义内核的真机运行分别说明。'],
+    ['The table below separates completed results from the work that remains. To avoid ambiguity, installing Apple’s original macOS on real hardware is listed separately from running the custom kernel on real hardware.', '下面分别列出已经完成的成果和仍需推进的工作。为避免误解，Apple 原版 macOS 的真机安装与自定义内核的真机运行分别说明。'],
+    ['Compile a custom', '编译自定义'], ['for macOS 11.4', '用于 macOS 11.4'], ['Compile a custom XNU kernel for macOS 11.4', '编译 macOS 11.4 的自定义 XNU 内核'],
+    ['Generate a custom kernel cache', '生成自定义内核缓存'], ['Fix custom-kernel boot failures', '修复自定义内核的启动问题'],
+    ['Build and configure the OpenCore environment', '构建并配置 OpenCore 启动环境'], ['Boot macOS 11.4 with the custom startup program and kernel', '使用自定义启动程序和内核启动 macOS 11.4'],
+    ['Create a macOS 11.4 installer containing the custom kernel', '制作包含自定义内核的 macOS 11.4 安装镜像'], ['Complete installation from the custom image', '使用自定义安装镜像完成系统安装'],
+    ['Complete first-boot setup and enter the desktop', '完成首次开机设置并进入桌面'], ['Verify the installed custom system files', '验证安装后的自定义系统文件'],
+    ['Enter the macOS recovery environment', '进入 macOS 恢复环境'], ["Install Apple's original macOS 11.4 on a physical Mac", '将 Apple 原版 macOS 11.4 安装到 Mac 真机'],
+    ['Install Apple’s original macOS 11.4 on a physical Mac', '将 Apple 原版 macOS 11.4 安装到 Mac 真机'],
+    ['Install and run the custom kernel on a physical Mac laptop', '在 Mac 笔记本真机上安装并运行自定义内核'], ['Install and run the custom macOS system on a Windows PC', '在 Windows PC 真机上安装并运行自定义 macOS'],
+    ['Complete physical-hardware driver support', '完成自定义系统的真机硬件驱动适配'], ['Complete compatibility testing across multiple computers', '完成不同型号电脑的兼容性测试'],
+    ['The system startup program has been compiled, modified, and debugged.', '已完成系统启动程序的编译、修改与调试。'], ['The kernel has been built and debugged from the XNU source corresponding to macOS 11.4.', '已基于 macOS 11.4 对应的 XNU 源代码完成编译与调试。'],
+    ['The custom XNU kernel and related system components have been packaged into the cache required to boot macOS.', '已将自定义 XNU 内核及相关系统组件打包为 macOS 启动所需的内核缓存。'], ['Several low-level compatibility and data-validation issues that stopped the system from booting have been resolved.', '已解决多个导致系统无法继续启动的底层兼容性和数据校验问题。'],
+    ['The boot environment can load the custom startup program and kernel in a virtual machine.', '已完成引导配置，使虚拟机能够加载自定义启动程序和内核。'], ['The system successfully reaches the macOS desktop in a virtual machine.', '已在虚拟机中成功启动系统并进入 macOS 桌面。'],
+    ['The custom startup program, kernel, and kernel cache have been integrated into an installation image.', '已将自定义启动程序、内核和内核缓存集成到安装镜像中。'], ['The complete path from booting the installer and installing to disk through first-boot setup has succeeded.', '已完成从安装镜像启动、磁盘安装到首次开机设置的完整流程。'],
+    ['A user account was created successfully, and system applications including Finder and Safari run normally.', '已成功创建用户，并正常打开 Finder、Safari 等系统应用。'], ['The startup program and kernel cache used by the installed system match the custom build outputs.', '已确认系统实际使用的启动程序和内核缓存与自定义编译结果一致。'],
+    ['The macOS recovery environment boots successfully in a virtual machine.', '已在虚拟机中成功启动 macOS 恢复环境。'], ['The original system was installed on a Late 2013 13-inch MacBook Pro and reached the desktop. This does not mean the custom kernel has run on real hardware.', '已在一台 2013 年末的 13 英寸 MacBook Pro 上完成原版系统安装并进入桌面；这不代表自定义内核已经在真机上运行。'],
+    ['The custom startup program and kernel have only been verified in a virtual machine; physical-Mac installation and boot remain unverified.', '目前自定义启动程序和内核只在虚拟机中完成验证，尚未在 Mac 真机上完成安装和启动。'], ['Adaptation and installation for PC processors, graphics, motherboards, storage, and other hardware have not yet been completed.', '尚未针对 PC 的处理器、显卡、主板、存储等硬件完成适配和安装验证。'],
+    ['Graphics, audio, networking, USB, power management, sleep, and wake must still be verified on target hardware.', '显卡、声音、网络、USB、电源管理及睡眠唤醒等功能仍需在目标硬件上逐项验证。'], ['Full installation and stability testing has not yet been performed across multiple Mac and Windows PC models.', '尚未在多款 Mac 和 Windows PC 上进行完整的安装与稳定性测试。'],
+    ['The central result is complete: the custom startup program, XNU kernel, and kernel cache have passed the full compile, install, boot, and desktop workflow in a virtual machine. The next milestone is adapting and validating the system on physical hardware.', '当前已经完成的核心成果是：自定义启动程序、自定义 XNU 内核和内核缓存已在虚拟机中完成编译、安装、启动并进入 macOS 桌面的完整流程。下一步将重点进行真机适配和验证。']
+  ]);
+  let currentLanguage = localStorage.getItem('ares-language') === 'zh' ? 'zh' : 'en';
+  const originalText = new WeakMap();
+  const isChinese = () => currentLanguage === 'zh';
+  const localize = (english, chinese) => isChinese() ? chinese : english;
+
+  const translatePage = language => {
+    currentLanguage = language === 'zh' ? 'zh' : 'en';
+    localStorage.setItem('ares-language', currentLanguage);
+    document.documentElement.lang = isChinese() ? 'zh-CN' : 'en';
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        return node.parentElement?.closest('script, style, pre, code, textarea') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    let node;
+    while ((node = walker.nextNode())) {
+      if (!originalText.has(node)) originalText.set(node, node.nodeValue);
+      const englishValue = originalText.get(node);
+      const englishText = englishValue.trim();
+      const translated = translations.get(englishText);
+      if (isChinese() && translated) node.nodeValue = englishValue.replace(englishText, translated);
+      else node.nodeValue = englishValue;
+    }
+    const languageToggle = document.querySelector('[data-language-toggle]');
+    const languageLabel = document.querySelector('[data-language-label]');
+    if (languageLabel) languageLabel.textContent = isChinese() ? 'EN' : '中文';
+    if (languageToggle) {
+      languageToggle.setAttribute('aria-label', isChinese() ? 'Switch to English' : '切换为中文');
+      languageToggle.title = isChinese() ? 'Switch to English' : '切换为中文';
+    }
+    const brandLocale = document.querySelector('.brand-copy small');
+    if (brandLocale) brandLocale.textContent = `MARS DEV LOG / ${isChinese() ? 'CN' : 'EN'}`;
+    if (searchInput) searchInput.placeholder = isChinese() ? '搜索技术、项目或关键词…' : 'Search technologies, projects, or keywords…';
+    const titleSource = document.querySelector('.article-heading h1, .inner-hero h1');
+    if (titleSource) document.title = `${titleSource.textContent.trim()} · MARS / DEV LOG`;
+    window.dispatchEvent(new CustomEvent('ares:languagechange', { detail: { language: currentLanguage } }));
+  };
+
+  document.querySelector('[data-language-toggle]')?.addEventListener('click', () => translatePage(isChinese() ? 'en' : 'zh'));
+
   const escapeHtml = value => String(value).replace(/[&<>'"]/g, char => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
   })[char]);
@@ -29,7 +137,7 @@
         const response = await fetch(`${window.ARES_ROOT || '/'}search.json`);
         searchData = await response.json();
       } catch (_) {
-        searchResults.innerHTML = '<p class="search-hint">搜索索引暂时无法建立。</p>';
+        searchResults.innerHTML = `<p class="search-hint">${isChinese() ? '搜索索引暂时无法建立。' : 'The search index is temporarily unavailable.'}</p>`;
       }
     }
   };
@@ -46,14 +154,14 @@
   });
   searchInput?.addEventListener('input', event => {
     const query = event.target.value.trim().toLowerCase();
-    if (!query) { searchResults.innerHTML = '<p class="search-hint">输入关键词，检索全部探索日志。</p>'; return; }
+    if (!query) { searchResults.innerHTML = `<p class="search-hint">${isChinese() ? '输入关键词，检索全部探索日志。' : 'Enter a keyword to search every exploration log.'}</p>`; return; }
     const matches = (searchData || []).filter(post => [post.title, post.text, ...post.categories, ...post.tags].join(' ').toLowerCase().includes(query)).slice(0, 8);
     searchResults.innerHTML = matches.length ? matches.map(post => `
       <a class="search-result" href="${escapeHtml(post.url)}">
-        <span>${escapeHtml(post.date)} · ${escapeHtml(post.categories.join(' / ') || '探索日志')}</span>
-        <strong>${escapeHtml(post.title)}</strong>
+        <span>${escapeHtml(post.date)} · ${escapeHtml(post.categories.join(' / ') || (isChinese() ? '探索日志' : 'Exploration Log'))}</span>
+        <strong>${escapeHtml(isChinese() ? (post.title_zh || post.title) : post.title)}</strong>
         <p>${escapeHtml(post.text.slice(0, 110))}…</p>
-      </a>`).join('') : '<p class="search-hint">没有找到相关日志，换一个关键词试试。</p>';
+      </a>`).join('') : `<p class="search-hint">${isChinese() ? '没有找到相关日志，换一个关键词试试。' : 'No matching logs found. Try another keyword.'}</p>`;
   });
 
   const toc = document.querySelector('[data-toc-list]');
@@ -68,6 +176,33 @@
       toc.appendChild(link);
     });
     if (!headings.length) document.querySelector('[data-toc]')?.remove();
+  }
+
+  const articleContent = document.querySelector('.article-content');
+  if (articleContent) {
+    const burstIcons = [
+      `<svg viewBox="0 0 64 64" aria-hidden="true"><g class="rover-icon"><circle cx="17" cy="48" r="7"/><circle cx="47" cy="48" r="7"/><path d="M15 43h35l-4-18H23z"/><path d="M30 25V13h11v12M35 13V7M31 7h8"/><circle cx="35" cy="7" r="3"/><path d="M10 39h8M47 36h8"/></g></svg>`,
+      `<svg viewBox="0 0 64 64" aria-hidden="true"><g class="starship-icon"><path d="M32 4c8 9 11 20 10 34H22C21 24 24 13 32 4Z"/><path d="M22 35 13 50l12-5M42 35l9 15-12-5"/><circle cx="32" cy="22" r="5"/><path class="starship-flame" d="m26 42 6 17 6-17"/></g></svg>`,
+      `<svg viewBox="0 0 64 64" aria-hidden="true"><g class="apple-icon"><path d="M45 33c0 14-8 24-14 24S17 47 17 33c0-9 6-15 14-12 8-3 14 3 14 12Z"/><path d="M32 21c0-8 5-13 11-14-1 7-5 12-11 14Z"/><path d="M31 21c0-5-2-9-5-12"/></g></svg>`,
+      `<svg viewBox="0 0 64 64" aria-hidden="true"><g class="mars-icon"><circle cx="32" cy="32" r="23"/><path d="M14 27c8-2 11 4 17 1s9-8 18-4M20 45c5-8 10-2 16-7s8-2 12 2M28 10c2 6 9 6 12 10"/></g></svg>`
+    ];
+    let lastBurst = 0;
+    articleContent.addEventListener('click', event => {
+      if (event.target.closest('a, button, input, textarea, select, pre, code')) return;
+      if (window.getSelection()?.toString()) return;
+      const now = performance.now();
+      if (now - lastBurst < 110) return;
+      lastBurst = now;
+      const burst = document.createElement('span');
+      burst.className = 'article-click-burst';
+      burst.setAttribute('aria-hidden', 'true');
+      burst.style.left = `${event.clientX}px`;
+      burst.style.top = `${event.clientY}px`;
+      burst.innerHTML = `<span class="article-click-icon">${burstIcons[Math.floor(Math.random() * burstIcons.length)]}</span>${Array.from({ length: 6 }, (_, index) => `<i style="--spark-angle:${index * 60 + Math.random() * 18}deg;--spark-distance:${26 + Math.random() * 18}px"></i>`).join('')}`;
+      document.body.appendChild(burst);
+      burst.addEventListener('animationend', () => burst.remove(), { once: true });
+      setTimeout(() => burst.remove(), 1400);
+    });
   }
 
   const observer = new IntersectionObserver(entries => entries.forEach(entry => {
@@ -156,10 +291,10 @@
     const requestLocation = () => {
       locationRequested = true;
       if (!navigator.geolocation) {
-        fields['observer-location'].textContent = '浏览器不支持定位';
+        fields['observer-location'].textContent = localize('LOCATION IS NOT SUPPORTED', '浏览器不支持定位');
         return;
       }
-      fields['observer-location'].textContent = '正在请求位置…';
+      fields['observer-location'].textContent = localize('REQUESTING LOCATION…', '正在请求位置…');
       navigator.geolocation.getCurrentPosition(position => {
         observerLocation = {
           latitude: position.coords.latitude,
@@ -170,7 +305,9 @@
         fields['observer-location'].textContent = `${formatDegree(observerLocation.latitude, 'N', 'S')}  ${formatDegree(observerLocation.longitude, 'E', 'W')}`;
         updateMarsData();
       }, error => {
-        fields['observer-location'].textContent = error.code === 1 ? '定位未授权 · 仅显示地心坐标' : '暂时无法定位 · 请重试';
+        fields['observer-location'].textContent = error.code === 1
+          ? localize('LOCATION DENIED · GEOCENTRIC VIEW', '定位未授权 · 仅显示地心坐标')
+          : localize('LOCATION UNAVAILABLE · TRY AGAIN', '暂时无法定位 · 请重试');
         locationRequested = false;
         updateMarsData();
       }, { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 });
@@ -287,8 +424,8 @@
       fields.ra.textContent = formatRa(equatorial.ra);
       fields.dec.textContent = formatSignedDegree(equatorial.dec);
       fields.ecliptic.textContent = `${ecliptic.elon.toFixed(2)}° / ${formatSignedDegree(ecliptic.elat)}`;
-      fields.distance.textContent = `${(distanceKm / 1000000).toFixed(2)} 百万 km`;
-      fields.light.textContent = `${(distanceKm / LIGHT_KM_S / 60).toFixed(1)} 分钟`;
+      fields.distance.textContent = `${(distanceKm / 1000000).toFixed(2)} ${localize('million km', '百万 km')}`;
+      fields.light.textContent = `${(distanceKm / LIGHT_KM_S / 60).toFixed(1)} ${localize('minutes', '分钟')}`;
       fields.lighting.textContent = `${illumination.mag.toFixed(2)} mag / ${(illumination.phase_fraction * 100).toFixed(1)}%`;
       fields.time.textContent = `UTC ${now.toISOString().replace('T', ' ').slice(0, 19)}`;
       if (earthAzimuth) earthAzimuth.textContent = `${earthFromOpportunity.azimuth.toFixed(2)}° / ${compassPointEnglish(earthFromOpportunity.azimuth)}`;
@@ -305,18 +442,18 @@
       }
 
       if (horizontal) {
-        fields.az.textContent = `${horizontal.azimuth.toFixed(2)}° ${compassPoint(horizontal.azimuth)}`;
+        fields.az.textContent = `${horizontal.azimuth.toFixed(2)}° ${isChinese() ? compassPoint(horizontal.azimuth) : compassPointEnglish(horizontal.azimuth)}`;
         fields.alt.textContent = formatSignedDegree(horizontal.altitude);
         fields.visibility.textContent = horizontal.altitude >= 0
-          ? `火星位于${compassPoint(horizontal.azimuth)}方地平线上 ${horizontal.altitude.toFixed(1)}°`
-          : `火星当前在${compassPoint(horizontal.azimuth)}方地平线下 ${Math.abs(horizontal.altitude).toFixed(1)}°`;
+          ? localize(`MARS IS ${horizontal.altitude.toFixed(1)}° ABOVE THE ${compassPointEnglish(horizontal.azimuth)} HORIZON`, `火星位于${compassPoint(horizontal.azimuth)}方地平线上 ${horizontal.altitude.toFixed(1)}°`)
+          : localize(`MARS IS ${Math.abs(horizontal.altitude).toFixed(1)}° BELOW THE ${compassPointEnglish(horizontal.azimuth)} HORIZON`, `火星当前在${compassPoint(horizontal.azimuth)}方地平线下 ${Math.abs(horizontal.altitude).toFixed(1)}°`);
         fields['mars-bearing'].style.transform = `rotate(${horizontal.azimuth}deg)`;
-        fields['mars-trigger-status'].textContent = `${horizontal.altitude >= 0 ? '可见' : '地平线下'} ${formatSignedDegree(horizontal.altitude)}`;
+        fields['mars-trigger-status'].textContent = `${horizontal.altitude >= 0 ? localize('VISIBLE', '可见') : localize('BELOW HORIZON', '地平线下')} ${formatSignedDegree(horizontal.altitude)}`;
       } else {
-        fields.az.textContent = '需要定位';
-        fields.alt.textContent = '需要定位';
-        fields.visibility.textContent = `地心视图 · 视直径 ${angularDiameter.toFixed(1)}″`;
-        fields['mars-trigger-status'].textContent = '启用定位';
+        fields.az.textContent = localize('LOCATION REQUIRED', '需要定位');
+        fields.alt.textContent = localize('LOCATION REQUIRED', '需要定位');
+        fields.visibility.textContent = localize(`GEOCENTRIC VIEW · ${angularDiameter.toFixed(1)}″ APPARENT DIAMETER`, `地心视图 · 视直径 ${angularDiameter.toFixed(1)}″`);
+        fields['mars-trigger-status'].textContent = localize('ENABLE LOCATION', '启用定位');
       }
     };
 
@@ -520,5 +657,6 @@
     animationFrame = requestAnimationFrame(drawSolarSystem);
     window.addEventListener('pagehide', () => cancelAnimationFrame(animationFrame), { once: true });
   }
+  translatePage(currentLanguage);
 })();
 

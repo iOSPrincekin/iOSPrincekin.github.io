@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#07090f">
-  <meta name="description" content="记录软件开发、系统设计与工程实践的人类火星探索主题技术博客">
+  <meta name="description" content="A Mars exploration-inspired technical blog about software development, system design, and engineering practice">
   <title>MARS / DEV LOG</title>
-  <link rel="icon" type="image/svg+xml" sizes="any" href="/images/favicon.svg?v=20261108-006">
-  <link rel="shortcut icon" type="image/svg+xml" href="/images/favicon.svg?v=20261108-006">
-  <link rel="mask-icon" href="/images/favicon.svg?v=20261108-006" color="#d25b34">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=20261108-006">
-  <link rel="stylesheet" href="/css/main.css?v=20261108-006">
+  <link rel="icon" type="image/svg+xml" sizes="any" href="/images/favicon.svg?v=20261112-001">
+  <link rel="shortcut icon" type="image/svg+xml" href="/images/favicon.svg?v=20261112-001">
+  <link rel="mask-icon" href="/images/favicon.svg?v=20261112-001" color="#d25b34">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=20261112-001">
+  <link rel="stylesheet" href="/css/main.css?v=20261112-001">
 <meta name="generator" content="Hexo 8.1.2"></head>
 <body class="page-home">
   <div class="noise" aria-hidden="true"></div>
   <header class="site-header" data-header>
-    <a class="brand" href="/" aria-label="返回首页">
+    <a class="brand" href="/" aria-label="Return home">
       <span class="brand-mark" aria-hidden="true">
         <svg viewBox="0 0 52 52" role="presentation">
           <path class="brand-orbit" d="M5 32C8 19 19 10 33 8C45 6 51 11 47 21C43 31 32 39 19 41C8 43 2 39 5 32Z"/>
@@ -25,69 +25,70 @@
           <span class="brand-starship"><i></i></span>
         </span>
       </span>
-      <span class="brand-copy"><strong>MARS / DEV LOG</strong><small>MARS DEV LOG / CN</small></span>
+      <span class="brand-copy"><strong>MARS / DEV LOG</strong><small>MARS DEV LOG / EN</small></span>
     </a>
-    <button class="nav-toggle" type="button" aria-label="打开导航" aria-expanded="false" data-nav-toggle>
+    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle>
       <span></span><span></span>
     </button>
     <nav class="site-nav" data-nav>
       
-        <a href="/">首页</a>
+        <a href="/">Home</a>
       
-        <a href="/archives/">探索日志</a>
+        <a href="/archives/">Logs</a>
       
-        <a href="/categories/">技术领域</a>
+        <a href="/categories/">Domains</a>
       
-        <a href="/projects/">项目档案</a>
+        <a href="/projects/">Projects</a>
       
-        <a href="/about/">关于</a>
+        <a href="/about/">About</a>
       
-      <button class="search-trigger" type="button" data-search-open aria-label="搜索文章">
+      <button class="search-trigger" type="button" data-search-open aria-label="Search articles">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
-        <span>搜索</span><kbd>⌘ K</kbd>
+        <span>SEARCH</span><kbd>⌘ K</kbd>
       </button>
+      <button class="language-toggle" type="button" data-language-toggle aria-label="切换为中文" title="切换为中文"><span data-language-label>中文</span></button>
       <button class="mars-live-trigger" type="button" data-mars-open aria-expanded="false" aria-controls="mars-observatory">
         <span class="mars-live-dot" aria-hidden="true"></span>
-        <span><b>MARS</b><small data-mars-trigger-status>实时位置</small></span>
+        <span><b>MARS</b><small data-mars-trigger-status>LIVE POSITION</small></span>
       </button>
     </nav>
   </header>
 
-  <aside class="mars-observatory" id="mars-observatory" data-mars-panel aria-hidden="true" aria-label="火星实时观测台">
+  <aside class="mars-observatory" id="mars-observatory" data-mars-panel aria-hidden="true" aria-label="Live Mars Observatory">
     <div class="mars-panel-head">
-      <div><small>LIVE EPHEMERIS</small><strong>火星实时观测台</strong></div>
-      <button type="button" data-mars-close aria-label="关闭火星实时观测台">×</button>
+      <div><small>LIVE EPHEMERIS</small><strong>LIVE MARS OBSERVATORY</strong></div>
+      <button type="button" data-mars-close aria-label="Close Live Mars Observatory">×</button>
     </div>
     <div class="mars-visual">
-      <canvas width="760" height="460" data-mars-canvas aria-label="太阳、地球与火星当前真实日心位置的动态轨道模型，并在地球上标出浏览者位置"></canvas>
+      <canvas width="760" height="460" data-mars-canvas aria-label="Live heliocentric orbital model of the Sun, Earth, and Mars, with the visitor marked on Earth"></canvas>
       <div class="mars-bearing" aria-hidden="true"><span>N</span><i data-mars-bearing></i></div>
       <div class="mars-visual-copy">
-        <strong data-mars-visibility>正在建立星历…</strong>
-        <small>真实时间 1:1 · 行星视觉放大</small>
+        <strong data-mars-visibility>CALCULATING EPHEMERIS…</strong>
+        <small>REAL TIME 1:1 · PLANETS VISUALLY ENLARGED</small>
       </div>
     </div>
     <div class="mars-observer-row">
-      <span>观察点</span>
-      <strong data-observer-location>尚未获取位置</strong>
-      <button type="button" data-location-request>启用定位</button>
+      <span>OBSERVER</span>
+      <strong data-observer-location>LOCATION NOT AVAILABLE</strong>
+      <button type="button" data-location-request>ENABLE LOCATION</button>
     </div>
     <dl class="mars-telemetry">
-      <div><dt>方位角 AZ</dt><dd data-mars-az>--</dd></div>
-      <div><dt>高度角 ALT</dt><dd data-mars-alt>--</dd></div>
-      <div><dt>赤经 RA</dt><dd data-mars-ra>--</dd></div>
-      <div><dt>赤纬 DEC</dt><dd data-mars-dec>--</dd></div>
-      <div><dt>黄经 / 黄纬</dt><dd data-mars-ecliptic>--</dd></div>
-      <div><dt>地火距离</dt><dd data-mars-distance>--</dd></div>
-      <div><dt>光行时间</dt><dd data-mars-light>--</dd></div>
-      <div><dt>视星等 / 照明</dt><dd data-mars-lighting>--</dd></div>
+      <div><dt>AZIMUTH AZ</dt><dd data-mars-az>--</dd></div>
+      <div><dt>ALTITUDE ALT</dt><dd data-mars-alt>--</dd></div>
+      <div><dt>RIGHT ASCENSION RA</dt><dd data-mars-ra>--</dd></div>
+      <div><dt>DECLINATION DEC</dt><dd data-mars-dec>--</dd></div>
+      <div><dt>ECLIPTIC LON / LAT</dt><dd data-mars-ecliptic>--</dd></div>
+      <div><dt>EARTH–MARS DISTANCE</dt><dd data-mars-distance>--</dd></div>
+      <div><dt>LIGHT TIME</dt><dd data-mars-light>--</dd></div>
+      <div><dt>MAGNITUDE / ILLUMINATION</dt><dd data-mars-lighting>--</dd></div>
     </dl>
     <div class="mars-panel-foot">
       <span data-mars-time>UTC --</span>
       <span>ASTRONOMY ENGINE · ±1′</span>
     </div>
-    <p class="mars-privacy">定位仅在你的浏览器内参与计算，不会上传或保存。</p>
+    <p class="mars-privacy">Your location is used only for calculations in this browser. It is never uploaded or stored.</p>
   </aside>
-  <button class="mars-panel-backdrop" type="button" data-mars-close aria-label="关闭火星实时观测台"></button>
+  <button class="mars-panel-backdrop" type="button" data-mars-close aria-label="Close Live Mars Observatory"></button>
 
   <main><section class="hero">
   <div class="hero-media" aria-hidden="true"></div>
@@ -97,11 +98,11 @@
   </div>
   <div class="hero-content">
     <p class="eyebrow"><span></span>HUMANITY / SOFTWARE / MARS</p>
-    <h1>向未知编程<br><em>BUILD THE UNKNOWN.</em></h1>
-    <p class="hero-lead">以软件为飞船，以好奇心为燃料。记录每一次技术探索，也记录人类走向火星的勇气。</p>
+    <h1>CODE THE UNKNOWN<br><em>BUILD THE UNKNOWN.</em></h1>
+    <p class="hero-lead">Software is our starship. Curiosity is our fuel. Every engineering expedition carries humanity one step closer to Mars.</p>
     <div class="hero-actions">
-      <a class="button button-primary" href="/archives/">阅读探索日志<span>↗</span></a>
-      <a class="button button-ghost" href="/projects/">查看项目档案</a>
+      <a class="button button-primary" href="/archives/">READ THE LOGS<span>↗</span></a>
+      <a class="button button-ghost" href="/projects/">VIEW PROJECTS</a>
     </div>
   </div>
   <div class="hero-telemetry" aria-label="Opportunity observation telemetry">
@@ -109,26 +110,26 @@
     <div><small>EARTH AZIMUTH</small><strong data-earth-azimuth>CALCULATING…</strong></div>
     <div><small>EARTH ALTITUDE</small><strong data-earth-altitude>CALCULATING…</strong></div>
   </div>
-  <a class="scroll-cue" href="#mission" aria-label="继续探索"><span></span>SCROLL TO EXPLORE</a>
+  <a class="scroll-cue" href="#mission" aria-label="Continue exploring"><span></span>SCROLL TO EXPLORE</a>
 </section>
 
 <section class="mission-section section-shell" id="mission">
   <div class="section-heading reveal">
     <p class="eyebrow"><span></span>THE MISSION</p>
-    <h2>代码是抵达未知世界<br>最可靠的航行工具</h2>
+    <h2>CODE IS OUR MOST RELIABLE<br>VEHICLE INTO THE UNKNOWN</h2>
   </div>
   <div class="mission-grid">
     <div class="mission-copy reveal">
-      <p>在代码、系统与产品之间持续探索，把复杂问题转化为可靠、清晰、可复用的工程实践。</p>
-      <p>这里收录软件开发中的真实问题、设计判断与实现细节。每一篇文章都是一次任务复盘：从发现异常，到建立模型，再到让系统稳定运行。</p>
-      <a class="text-link" href="/about/">了解这次长期任务 <span>→</span></a>
+      <p>Exploring the space between code, systems, and products—turning complex problems into reliable, clear, and reusable engineering practice.</p>
+      <p>This site records real software problems, design decisions, and implementation details. Every article is a mission review: from discovering an anomaly, to building a model, to making the system run reliably.</p>
+      <a class="text-link" href="/about/">LEARN ABOUT THE LONG MISSION <span>→</span></a>
     </div>
-    <div class="mission-card reveal" aria-label="任务原则">
+    <div class="mission-card reveal" aria-label="Mission principles">
       <div class="radar"><span></span><i></i><b></b></div>
       <ul>
-        <li><span>01</span><div><strong>保持好奇</strong><small>CURIOUS BY DEFAULT</small></div></li>
-        <li><span>02</span><div><strong>追求清晰</strong><small>CLARITY OVER NOISE</small></div></li>
-        <li><span>03</span><div><strong>勇于验证</strong><small>COURAGE TO TEST</small></div></li>
+        <li><span>01</span><div><strong>STAY CURIOUS</strong><small>CURIOUS BY DEFAULT</small></div></li>
+        <li><span>02</span><div><strong>SEEK CLARITY</strong><small>CLARITY OVER NOISE</small></div></li>
+        <li><span>03</span><div><strong>TEST WITH COURAGE</strong><small>COURAGE TO TEST</small></div></li>
       </ul>
     </div>
   </div>
@@ -136,21 +137,21 @@
 
 <section class="logs-section section-shell">
   <div class="section-heading row reveal">
-    <div><p class="eyebrow"><span></span>LATEST TRANSMISSIONS</p><h2>最新探索日志</h2></div>
-    <a class="text-link" href="/archives/">查看全部日志 <span>→</span></a>
+    <div><p class="eyebrow"><span></span>LATEST TRANSMISSIONS</p><h2>LATEST EXPLORATION LOGS</h2></div>
+    <a class="text-link" href="/archives/">VIEW ALL LOGS <span>→</span></a>
   </div>
   <div class="post-grid">
     
       <article class="post-card reveal">
-        <a class="post-card-link" href="/2026/11/11/%E7%BC%96%E8%AF%91%E8%87%AA%E5%B7%B1%E7%9A%84macos%E5%86%85%E6%A0%B8-%E6%88%90%E6%9E%9C%E7%AF%87/" aria-label="阅读 编译自己的macos内核-成果篇"></a>
+        <a class="post-card-link" href="/2026/11/11/%E7%BC%96%E8%AF%91%E8%87%AA%E5%B7%B1%E7%9A%84macos%E5%86%85%E6%A0%B8-%E6%88%90%E6%9E%9C%E7%AF%87/" aria-label="Read Build Your Own macOS Kernel — Results"></a>
         <div class="post-card-top">
           <span class="mission-code">MSN-261111-01</span>
           <time datetime="2026-11-11T14:34:01.000Z">2026.11.11</time>
         </div>
         <div class="post-card-body">
           
-          <h3>编译自己的macos内核-成果篇</h3>
-          <p>背景macOS 是一款优秀的操作系统，很多 iOS&amp;#x2F;Macos 开发者对于操作系统的知识仅限于资料上的纸上谈兵，如何和macos内核源代码进行深入交互是一件困难和及其有挑战的事...</p>
+          <h3>Build Your Own macOS Kernel — Results</h3>
+          <p>BackgroundmacOS is an excellent operating system, yet many iOS and macOS developers only enco...</p>
         </div>
         <div class="post-card-foot"><span>3 MIN READ</span><span class="card-arrow">↗</span></div>
       </article>
@@ -159,23 +160,23 @@
 </section>
 
 <section class="domains-section section-shell">
-  <div class="section-heading reveal"><p class="eyebrow"><span></span>EXPLORATION DOMAINS</p><h2>持续深入的技术领域</h2></div>
+  <div class="section-heading reveal"><p class="eyebrow"><span></span>EXPLORATION DOMAINS</p><h2>FIELDS OF CONTINUOUS EXPLORATION</h2></div>
   <div class="domain-list">
     
-      <div class="domain-row reveal"><span>01</span><h3>移动开发<small>MOBILE ENGINEERING</small></h3><p>Swift · iOS · 交互与性能</p><i>→</i></div>
+      <div class="domain-row reveal"><span>01</span><h3>MOBILE DEVELOPMENT<small>MOBILE ENGINEERING</small></h3><p>Swift · iOS · Interaction · Performance</p><i>→</i></div>
     
-      <div class="domain-row reveal"><span>02</span><h3>系统设计<small>SYSTEM DESIGN</small></h3><p>架构 · 并发 · 可靠性</p><i>→</i></div>
+      <div class="domain-row reveal"><span>02</span><h3>SYSTEM DESIGN<small>SYSTEM DESIGN</small></h3><p>Architecture · Concurrency · Reliability</p><i>→</i></div>
     
-      <div class="domain-row reveal"><span>03</span><h3>工程效率<small>ENGINEERING TOOLS</small></h3><p>自动化 · 工具链 · 开发体验</p><i>→</i></div>
+      <div class="domain-row reveal"><span>03</span><h3>ENGINEERING TOOLS<small>ENGINEERING TOOLS</small></h3><p>Automation · Toolchains · Developer Experience</p><i>→</i></div>
     
-      <div class="domain-row reveal"><span>04</span><h3>智能探索<small>INTELLIGENT SYSTEMS</small></h3><p>AI · 数据 · 新型交互</p><i>→</i></div>
+      <div class="domain-row reveal"><span>04</span><h3>INTELLIGENT SYSTEMS<small>INTELLIGENT SYSTEMS</small></h3><p>AI · Data · Emerging Interfaces</p><i>→</i></div>
     
   </div>
 </section>
 
 <section class="manifesto section-shell reveal">
   <p class="eyebrow"><span></span>FIELD NOTE / 001</p>
-  <blockquote>“真正的探索，不是确信前方安全，<br>而是在未知中仍然选择向前。”</blockquote>
+  <blockquote>“Exploration is not the certainty of safety ahead,<br>but the decision to move forward through the unknown.”</blockquote>
   <div><span></span><small>KEEP BUILDING<br>KEEP EXPLORING</small></div>
 </section>
 
@@ -191,22 +192,22 @@
   </footer>
 
   <div class="search-panel" data-search-panel aria-hidden="true">
-    <button class="search-backdrop" type="button" data-search-close aria-label="关闭搜索"></button>
-    <section class="search-dialog" role="dialog" aria-modal="true" aria-label="搜索探索日志">
+    <button class="search-backdrop" type="button" data-search-close aria-label="Close search"></button>
+    <section class="search-dialog" role="dialog" aria-modal="true" aria-label="Search exploration logs">
       <div class="search-field">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
-        <input type="search" placeholder="搜索技术、项目或关键词…" autocomplete="off" data-search-input>
+        <input type="search" placeholder="Search technologies, projects, or keywords…" autocomplete="off" data-search-input>
         <button type="button" data-search-close>ESC</button>
       </div>
       <div class="search-results" data-search-results>
-        <p class="search-hint">输入关键词，检索全部探索日志。</p>
+        <p class="search-hint">Enter a keyword to search every exploration log.</p>
       </div>
     </section>
   </div>
 
   <script>window.ARES_ROOT = "/";</script>
-  <script src="/js/astronomy.browser.min.js?v=20261108-006"></script>
-  <script src="/js/main.js?v=20261108-006" defer></script>
+  <script src="/js/astronomy.browser.min.js?v=20261112-001"></script>
+  <script src="/js/main.js?v=20261112-001" defer></script>
 </body>
 </html>
 

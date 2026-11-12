@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#07090f">
-  <meta name="description" content="记录软件开发、系统设计与工程实践的人类火星探索主题技术博客">
-  <title>编译自己的macos内核-成果篇 · MARS / DEV LOG</title>
-  <link rel="icon" type="image/svg+xml" sizes="any" href="/images/favicon.svg?v=20261108-006">
-  <link rel="shortcut icon" type="image/svg+xml" href="/images/favicon.svg?v=20261108-006">
-  <link rel="mask-icon" href="/images/favicon.svg?v=20261108-006" color="#d25b34">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=20261108-006">
-  <link rel="stylesheet" href="/css/main.css?v=20261108-006">
+  <meta name="description" content="A Mars exploration-inspired technical blog about software development, system design, and engineering practice">
+  <title>Build Your Own macOS Kernel — Results · MARS / DEV LOG</title>
+  <link rel="icon" type="image/svg+xml" sizes="any" href="/images/favicon.svg?v=20261112-001">
+  <link rel="shortcut icon" type="image/svg+xml" href="/images/favicon.svg?v=20261112-001">
+  <link rel="mask-icon" href="/images/favicon.svg?v=20261112-001" color="#d25b34">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=20261112-001">
+  <link rel="stylesheet" href="/css/main.css?v=20261112-001">
 <meta name="generator" content="Hexo 8.1.2"></head>
 <body class="page-post">
   <div class="noise" aria-hidden="true"></div>
   <header class="site-header" data-header>
-    <a class="brand" href="/" aria-label="返回首页">
+    <a class="brand" href="/" aria-label="Return home">
       <span class="brand-mark" aria-hidden="true">
         <svg viewBox="0 0 52 52" role="presentation">
           <path class="brand-orbit" d="M5 32C8 19 19 10 33 8C45 6 51 11 47 21C43 31 32 39 19 41C8 43 2 39 5 32Z"/>
@@ -25,77 +25,78 @@
           <span class="brand-starship"><i></i></span>
         </span>
       </span>
-      <span class="brand-copy"><strong>MARS / DEV LOG</strong><small>MARS DEV LOG / CN</small></span>
+      <span class="brand-copy"><strong>MARS / DEV LOG</strong><small>MARS DEV LOG / EN</small></span>
     </a>
-    <button class="nav-toggle" type="button" aria-label="打开导航" aria-expanded="false" data-nav-toggle>
+    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle>
       <span></span><span></span>
     </button>
     <nav class="site-nav" data-nav>
       
-        <a href="/">首页</a>
+        <a href="/">Home</a>
       
-        <a href="/archives/">探索日志</a>
+        <a href="/archives/">Logs</a>
       
-        <a href="/categories/">技术领域</a>
+        <a href="/categories/">Domains</a>
       
-        <a href="/projects/">项目档案</a>
+        <a href="/projects/">Projects</a>
       
-        <a href="/about/">关于</a>
+        <a href="/about/">About</a>
       
-      <button class="search-trigger" type="button" data-search-open aria-label="搜索文章">
+      <button class="search-trigger" type="button" data-search-open aria-label="Search articles">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
-        <span>搜索</span><kbd>⌘ K</kbd>
+        <span>SEARCH</span><kbd>⌘ K</kbd>
       </button>
+      <button class="language-toggle" type="button" data-language-toggle aria-label="切换为中文" title="切换为中文"><span data-language-label>中文</span></button>
       <button class="mars-live-trigger" type="button" data-mars-open aria-expanded="false" aria-controls="mars-observatory">
         <span class="mars-live-dot" aria-hidden="true"></span>
-        <span><b>MARS</b><small data-mars-trigger-status>实时位置</small></span>
+        <span><b>MARS</b><small data-mars-trigger-status>LIVE POSITION</small></span>
       </button>
     </nav>
   </header>
 
-  <aside class="mars-observatory" id="mars-observatory" data-mars-panel aria-hidden="true" aria-label="火星实时观测台">
+  <aside class="mars-observatory" id="mars-observatory" data-mars-panel aria-hidden="true" aria-label="Live Mars Observatory">
     <div class="mars-panel-head">
-      <div><small>LIVE EPHEMERIS</small><strong>火星实时观测台</strong></div>
-      <button type="button" data-mars-close aria-label="关闭火星实时观测台">×</button>
+      <div><small>LIVE EPHEMERIS</small><strong>LIVE MARS OBSERVATORY</strong></div>
+      <button type="button" data-mars-close aria-label="Close Live Mars Observatory">×</button>
     </div>
     <div class="mars-visual">
-      <canvas width="760" height="460" data-mars-canvas aria-label="太阳、地球与火星当前真实日心位置的动态轨道模型，并在地球上标出浏览者位置"></canvas>
+      <canvas width="760" height="460" data-mars-canvas aria-label="Live heliocentric orbital model of the Sun, Earth, and Mars, with the visitor marked on Earth"></canvas>
       <div class="mars-bearing" aria-hidden="true"><span>N</span><i data-mars-bearing></i></div>
       <div class="mars-visual-copy">
-        <strong data-mars-visibility>正在建立星历…</strong>
-        <small>真实时间 1:1 · 行星视觉放大</small>
+        <strong data-mars-visibility>CALCULATING EPHEMERIS…</strong>
+        <small>REAL TIME 1:1 · PLANETS VISUALLY ENLARGED</small>
       </div>
     </div>
     <div class="mars-observer-row">
-      <span>观察点</span>
-      <strong data-observer-location>尚未获取位置</strong>
-      <button type="button" data-location-request>启用定位</button>
+      <span>OBSERVER</span>
+      <strong data-observer-location>LOCATION NOT AVAILABLE</strong>
+      <button type="button" data-location-request>ENABLE LOCATION</button>
     </div>
     <dl class="mars-telemetry">
-      <div><dt>方位角 AZ</dt><dd data-mars-az>--</dd></div>
-      <div><dt>高度角 ALT</dt><dd data-mars-alt>--</dd></div>
-      <div><dt>赤经 RA</dt><dd data-mars-ra>--</dd></div>
-      <div><dt>赤纬 DEC</dt><dd data-mars-dec>--</dd></div>
-      <div><dt>黄经 / 黄纬</dt><dd data-mars-ecliptic>--</dd></div>
-      <div><dt>地火距离</dt><dd data-mars-distance>--</dd></div>
-      <div><dt>光行时间</dt><dd data-mars-light>--</dd></div>
-      <div><dt>视星等 / 照明</dt><dd data-mars-lighting>--</dd></div>
+      <div><dt>AZIMUTH AZ</dt><dd data-mars-az>--</dd></div>
+      <div><dt>ALTITUDE ALT</dt><dd data-mars-alt>--</dd></div>
+      <div><dt>RIGHT ASCENSION RA</dt><dd data-mars-ra>--</dd></div>
+      <div><dt>DECLINATION DEC</dt><dd data-mars-dec>--</dd></div>
+      <div><dt>ECLIPTIC LON / LAT</dt><dd data-mars-ecliptic>--</dd></div>
+      <div><dt>EARTH–MARS DISTANCE</dt><dd data-mars-distance>--</dd></div>
+      <div><dt>LIGHT TIME</dt><dd data-mars-light>--</dd></div>
+      <div><dt>MAGNITUDE / ILLUMINATION</dt><dd data-mars-lighting>--</dd></div>
     </dl>
     <div class="mars-panel-foot">
       <span data-mars-time>UTC --</span>
       <span>ASTRONOMY ENGINE · ±1′</span>
     </div>
-    <p class="mars-privacy">定位仅在你的浏览器内参与计算，不会上传或保存。</p>
+    <p class="mars-privacy">Your location is used only for calculations in this browser. It is never uploaded or stored.</p>
   </aside>
-  <button class="mars-panel-backdrop" type="button" data-mars-close aria-label="关闭火星实时观测台"></button>
+  <button class="mars-panel-backdrop" type="button" data-mars-close aria-label="Close Live Mars Observatory"></button>
 
   <main><article class="article-shell">
   <header class="article-hero">
     <div class="article-gridlines" aria-hidden="true"></div>
     <div class="article-heading">
-      <a class="back-link" href="/archives/">← 返回探索日志</a>
+      <a class="back-link" href="/archives/">← BACK TO EXPLORATION LOGS</a>
       <div class="article-meta"><span class="mission-code">MSN-261111-01</span><time>2026.11.11</time><span>3 MIN READ</span></div>
-      <h1>编译自己的macos内核-成果篇</h1>
+      <h1 data-page-title-zh="编译自己的 macOS 内核——成果篇">Build Your Own macOS Kernel — Results</h1>
       
     </div>
   </header>
@@ -105,99 +106,102 @@
       <div></div>
       <small>2026<br>MARS DEV LOG</small>
     </aside>
-    <div class="article-content prose"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>macOS 是一款优秀的操作系统，很多 iOS&#x2F;Macos 开发者对于操作系统的知识仅限于资料上的纸上谈兵，如何和macos内核源代码进行深入交互是一件困难和及其有挑战的事情，好在我有幸完成了这一工作，拥有了自己的macOS！</p>
-<h2 id="成果展示"><a href="#成果展示" class="headerlink" title="成果展示"></a>成果展示</h2><p><img src="/2026/11/11/%E7%BC%96%E8%AF%91%E8%87%AA%E5%B7%B1%E7%9A%84macos%E5%86%85%E6%A0%B8-%E6%88%90%E6%9E%9C%E7%AF%87/boot_kernel_%E5%85%A8%E9%83%A8%E9%83%BD%E6%9B%BF%E6%8D%A2%E4%B8%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E6%88%90%E5%8A%9F_20261110.png" alt="自定义 boot.efi 与 XNU 内核成功启动 macOS 11.4"></p>
-<p>从图中可以看到我们在macos 根本无法修改的 &#x2F;System&#x2F;Library&#x2F;CoreServices&#x2F;boot.efi、&#x2F;System&#x2F;Library&#x2F;KernelCollections&#x2F;BootKernelExtensions.kc 已经被我修改为我自己编译的 版本</p>
-<h3 id="项目完成情况"><a href="#项目完成情况" class="headerlink" title="项目完成情况"></a>项目完成情况</h3><p>下面列出了目前已经实现的成果和下一步需要完成的工作。为避免误解，Apple 原版 macOS 的真机安装与自定义内核的真机安装分别列出。</p>
+    <div class="article-content prose"><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>macOS is an excellent operating system, yet many iOS and macOS developers only encounter operating-system internals in documentation. Working directly with the macOS kernel source is difficult and demanding. After a long investigation, I completed that journey and built a macOS system with my own startup program and kernel.</p>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><p><img src="/2026/11/11/%E7%BC%96%E8%AF%91%E8%87%AA%E5%B7%B1%E7%9A%84macos%E5%86%85%E6%A0%B8-%E6%88%90%E6%9E%9C%E7%AF%87/boot_kernel_%E5%85%A8%E9%83%A8%E9%83%BD%E6%9B%BF%E6%8D%A2%E4%B8%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E6%88%90%E5%8A%9F_20261110.png" alt="macOS 11.4 successfully booted with a custom boot.efi and XNU kernel"></p>
+<p>The screenshot shows macOS running with my compiled versions of <code>/System/Library/CoreServices/boot.efi</code> and <code>/System/Library/KernelCollections/BootKernelExtensions.kc</code>, two protected components that cannot normally be replaced in a standard system.</p>
+<h3 id="Project-Status"><a href="#Project-Status" class="headerlink" title="Project Status"></a>Project Status</h3><p>The table below separates completed results from the work that remains. To avoid ambiguity, installing Apple’s original macOS on real hardware is listed separately from running the custom kernel on real hardware.</p>
 <table>
 <thead>
 <tr>
-<th align="center">状态</th>
-<th>事项</th>
-<th>说明</th>
+<th align="center">Status</th>
+<th>Item</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody><tr>
 <td align="center">✅</td>
-<td>编译 macOS 11.4 的自定义 <code>boot.efi</code></td>
-<td>已完成系统启动程序的编译、修改与调试。</td>
+<td>Compile a custom <code>boot.efi</code> for macOS 11.4</td>
+<td>The system startup program has been compiled, modified, and debugged.</td>
 </tr>
 <tr>
 <td align="center">✅</td>
-<td>编译 macOS 11.4 的自定义 XNU 内核</td>
-<td>已基于 macOS 11.4 对应的 XNU 源代码完成编译与调试。</td>
+<td>Compile a custom XNU kernel for macOS 11.4</td>
+<td>The kernel has been built and debugged from the XNU source corresponding to macOS 11.4.</td>
 </tr>
 <tr>
 <td align="center">✅</td>
-<td>生成自定义内核缓存</td>
-<td>已将自定义 XNU 内核及相关系统组件打包为 macOS 启动所需的内核缓存。</td>
+<td>Generate a custom kernel cache</td>
+<td>The custom XNU kernel and related system components have been packaged into the cache required to boot macOS.</td>
 </tr>
 <tr>
 <td align="center">✅</td>
-<td>修复自定义内核的启动问题</td>
-<td>已解决多个导致系统无法继续启动的底层兼容性和数据校验问题。</td>
+<td>Fix custom-kernel boot failures</td>
+<td>Several low-level compatibility and data-validation issues that stopped the system from booting have been resolved.</td>
 </tr>
 <tr>
 <td align="center">✅</td>
-<td>构建并配置 OpenCore 启动环境</td>
-<td>已完成引导配置，使虚拟机能够加载自定义启动程序和内核。</td>
+<td>Build and configure the OpenCore environment</td>
+<td>The boot environment can load the custom startup program and kernel in a virtual machine.</td>
 </tr>
 <tr>
 <td align="center">✅</td>
-<td>使用自定义启动程序和内核启动 macOS 11.4</td>
-<td>已在虚拟机中成功启动系统并进入 macOS 桌面。</td>
+<td>Boot macOS 11.4 with the custom startup program and kernel</td>
+<td>The system successfully reaches the macOS desktop in a virtual machine.</td>
 </tr>
 <tr>
 <td align="center">✅</td>
-<td>制作包含自定义内核的 macOS 11.4 安装镜像</td>
-<td>已将自定义启动程序、内核和内核缓存集成到安装镜像中。</td>
+<td>Create a macOS 11.4 installer containing the custom kernel</td>
+<td>The custom startup program, kernel, and kernel cache have been integrated into an installation image.</td>
 </tr>
 <tr>
 <td align="center">✅</td>
-<td>使用自定义安装镜像完成系统安装</td>
-<td>已完成从安装镜像启动、磁盘安装到首次开机设置的完整流程。</td>
+<td>Complete installation from the custom image</td>
+<td>The complete path from booting the installer and installing to disk through first-boot setup has succeeded.</td>
 </tr>
 <tr>
 <td align="center">✅</td>
-<td>完成首次开机设置并进入桌面</td>
-<td>已成功创建用户，并正常打开 Finder、Safari 等系统应用。</td>
+<td>Complete first-boot setup and enter the desktop</td>
+<td>A user account was created successfully, and system applications including Finder and Safari run normally.</td>
 </tr>
 <tr>
 <td align="center">✅</td>
-<td>验证安装后的自定义系统文件</td>
-<td>已确认系统实际使用的启动程序和内核缓存与自定义编译结果一致。</td>
+<td>Verify the installed custom system files</td>
+<td>The startup program and kernel cache used by the installed system match the custom build outputs.</td>
 </tr>
 <tr>
 <td align="center">✅</td>
-<td>进入 macOS 恢复环境</td>
-<td>已在虚拟机中成功启动 macOS 恢复环境。</td>
+<td>Enter the macOS recovery environment</td>
+<td>The macOS recovery environment boots successfully in a virtual machine.</td>
 </tr>
 <tr>
 <td align="center">✅</td>
-<td>将 Apple 原版 macOS 11.4 安装到 Mac 真机</td>
-<td>已在一台 2013 年末的 13 英寸 MacBook Pro 上完成原版系统安装并进入桌面；这不代表自定义内核已经在真机上运行。</td>
+<td>Install Apple’s original macOS 11.4 on a physical Mac</td>
+<td>The original system was installed on a Late 2013 13-inch MacBook Pro and reached the desktop. This does not mean the custom kernel has run on real hardware.</td>
 </tr>
 <tr>
 <td align="center">❌</td>
-<td>在 Mac 笔记本真机上安装并运行自定义内核</td>
-<td>目前自定义启动程序和自定义内核只在虚拟机中完成验证，尚未在 Mac 真机上完成安装和启动。</td>
+<td>Install and run the custom kernel on a physical Mac laptop</td>
+<td>The custom startup program and kernel have only been verified in a virtual machine; physical-Mac installation and boot remain unverified.</td>
 </tr>
 <tr>
 <td align="center">❌</td>
-<td>在 Windows PC 真机上安装并运行自定义 macOS</td>
-<td>尚未针对 PC 的处理器、显卡、主板、存储等硬件完成适配和安装验证。</td>
+<td>Install and run the custom macOS system on a Windows PC</td>
+<td>Adaptation and installation for PC processors, graphics, motherboards, storage, and other hardware have not yet been completed.</td>
 </tr>
 <tr>
 <td align="center">❌</td>
-<td>完成自定义系统的真机硬件驱动适配</td>
-<td>显卡、声音、网络、USB、电源管理及睡眠唤醒等功能仍需在目标硬件上逐项验证。</td>
+<td>Complete physical-hardware driver support</td>
+<td>Graphics, audio, networking, USB, power management, sleep, and wake must still be verified on target hardware.</td>
 </tr>
 <tr>
 <td align="center">❌</td>
-<td>完成不同型号电脑的兼容性测试</td>
-<td>尚未在多款 Mac 和 Windows PC 上进行完整的安装与稳定性测试。</td>
+<td>Complete compatibility testing across multiple computers</td>
+<td>Full installation and stability testing has not yet been performed across multiple Mac and Windows PC models.</td>
 </tr>
 </tbody></table>
+<blockquote>
+<p>The central result is complete: the custom startup program, XNU kernel, and kernel cache have passed the full compile, install, boot, and desktop workflow in a virtual machine. The next milestone is adapting and validating the system on physical hardware.</p>
+</blockquote>
 </div>
     <aside class="article-toc" data-toc>
       <p>ON THIS MISSION</p>
@@ -225,22 +229,22 @@
   </footer>
 
   <div class="search-panel" data-search-panel aria-hidden="true">
-    <button class="search-backdrop" type="button" data-search-close aria-label="关闭搜索"></button>
-    <section class="search-dialog" role="dialog" aria-modal="true" aria-label="搜索探索日志">
+    <button class="search-backdrop" type="button" data-search-close aria-label="Close search"></button>
+    <section class="search-dialog" role="dialog" aria-modal="true" aria-label="Search exploration logs">
       <div class="search-field">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
-        <input type="search" placeholder="搜索技术、项目或关键词…" autocomplete="off" data-search-input>
+        <input type="search" placeholder="Search technologies, projects, or keywords…" autocomplete="off" data-search-input>
         <button type="button" data-search-close>ESC</button>
       </div>
       <div class="search-results" data-search-results>
-        <p class="search-hint">输入关键词，检索全部探索日志。</p>
+        <p class="search-hint">Enter a keyword to search every exploration log.</p>
       </div>
     </section>
   </div>
 
   <script>window.ARES_ROOT = "/";</script>
-  <script src="/js/astronomy.browser.min.js?v=20261108-006"></script>
-  <script src="/js/main.js?v=20261108-006" defer></script>
+  <script src="/js/astronomy.browser.min.js?v=20261112-001"></script>
+  <script src="/js/main.js?v=20261112-001" defer></script>
 </body>
 </html>
 
